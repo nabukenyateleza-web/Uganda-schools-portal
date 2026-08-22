@@ -1,60 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Uganda Schools Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uganda School Management - Multi-Tenant Portal</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#f5f7fb}
-header{background:#0b5e2f;color:white;padding:20px;text-align:center}
-nav{background:white;padding:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-nav a{background:#0b5e2f;color:white;padding:10px 18px;border-radius:20px;text-decoration:none;font-weight:bold}
-.hero{padding:40px 20px;text-align:center}
-.hero a{display:inline-block;margin:8px;padding:14px 22px;border-radius:8px;text-decoration:none;color:white;font-weight:bold}
-.btn1{background:#0b5e2f} .btn2{background:#ff9f00}
-.card{background:white;margin:20px;padding:20px;border-radius:12px}
-input{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin:8px 0}
-.school{border-bottom:1px solid #eee;padding:12px 0}
-.school a{color:#0b5e2f;font-weight:bold;text-decoration:none}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+body{font-family:'Inter',sans-serif;background:#f6f7fb}
+.nav-active{background:#111827;color:white}
 </style>
 </head>
-<body>
-<header><h1>Uganda Schools Portal</h1><p>Find Secondary & Primary Schools</p></header>
-<nav>
-<a href="#schools">Schools</a>
-<a href="#converter">UGX Rates</a>
-<a href="#search">Google Search</a>
-</nav>
-<div class="hero">
-<h2>Find Best School for Your Child</h2>
-<a class="btn1" href="#schools">Find Schools</a>
-<a class="btn2" href="#converter">UGX Converter</a>
+<body class="text-sm">
+<div class="min-h-screen flex">
+<div class="w-[270px] bg-black text-white flex flex-col fixed h-screen overflow-y-auto z-50">
+<div class="p-5 border-b border-white/10">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 bg-yellow-400 rounded-lg flex items-center justify-center text-black font-bold">UG</div>
+<div><p class="font-bold leading-tight" id="schoolNameDisplay">St. Mary's College Kisubi</p><p class="text-[11px] text-white/60">Multi-School • Uganda</p></div>
 </div>
-<div class="card" id="schools">
-<h3>Top Schools in Uganda</h3>
-<input id="q" placeholder="Search school..." onkeyup="filter()">
-<div id="list"></div>
 </div>
-<div class="card" id="converter">
-<h3>UGX Exchange Rate Today</h3>
-<p>1 USD = 3,720 UGX | 1 EUR = 4,020 UGX</p>
-<input id="ugx" type="number" placeholder="Enter UGX amount" onkeyup="convert()">
-<p id="res"></p>
+<div class="p-3">
+<p class="text-[10px] tracking-widest text-white/40 font-bold px-2 mb-2">MAIN PORTAL</p>
+<nav id="mainNav" class="space-y-1"></nav>
+<p class="text-[10px] tracking-widest text-white/40 font-bold px-2 mt-6 mb-2">PARENT VIEW</p>
+<button onclick="switchRole('parent')" class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/10 text-left"><i class="ri-parent-line"></i> My Children <span class="ml-auto bg-yellow-400 text-black text-[10px] px-2 py-0.5 rounded-full">SECURE</span></button>
 </div>
-<div class="card" id="search">
-<h3>Search Any School on Google</h3>
-<input id="gq" placeholder="Type school name">
-<a href="#" onclick="gosearch();return false" style="display:block;background:#0b5e2f;color:white;text-align:center;padding:12px;border-radius:8px;text-decoration:none;margin-top:8px">Search on Google</a>
+<div class="mt-auto p-3 border-t border-white/10">
+<div class="bg-white/5 rounded-xl p-3"><p class="text-[11px] text-white/60">Logged as</p><p class="font-semibold" id="currentRoleDisplay">Head Teacher</p>
+<div class="flex gap-1 mt-2 flex-wrap">
+<button onclick="switchRole('head')" class="text-[10px] px-2 py-1 bg-white text-black rounded">HEAD</button>
+<button onclick="switchRole('deputy')" class="text-[10px] px-2 py-1 bg-white/10 rounded">DEPUTY</button>
+<button onclick="switchRole('dos')" class="text-[10px] px-2 py-1 bg-white/10 rounded">DOS</button>
+<button onclick="switchRole('teacher')" class="text-[10px] px-2 py-1 bg-white/10 rounded">TEACHER</button>
+</div></div>
 </div>
-<script>
-let schools=["Gayaza High School - Wakiso","King's College Budo - Wakiso","Mt St Mary's Namagunga - Mukono","Nabisunsa Girls - Kampala","St Mary's Kitende - Wakiso","Kampala Parents School","Greenhill Academy - Kampala","Seeta High School - Mukono","Buddo SS","Trinity College Nabbingo"];
-let listDiv=document.getElementById('list');
-function show(arr){listDiv.innerHTML=arr.map(s=>`<div class=school><a href="https://www.google.com/search?q=${encodeURIComponent(s)}" target="_blank">${s}</a></div>`).join('')}
-show(schools);
-function filter(){let v=q.value.toLowerCase();show(schools.filter(s=>s.toLowerCase().includes(v)))}
-function convert(){let v=parseFloat(ugx.value)||0;res.innerHTML`= $${(v/3720).toFixed(2)} USD`}
-function gosearch(){let v=document.getElementById('gq').value;if(v) window.open('https://www.google.com/search?q='+encodeURIComponent(v+' Uganda school'),'_blank')}
-</script>
-</body>
-</html>
+</div>
+
+<div class="flex-1 ml-[270px]">
+<div class="h-[60px] bg-white border-b flex items-center justify-between px-6 sticky top-0 z-40">
+<div class="flex items-center gap-4"><h1 id="pageTitle" class="text-xl font-bold">Dashboard</h1><span class="text-[11px] bg-green-100 text-green-700 px-2 py-1 rounded-full">Data isolated • This school only</span></div>
+<div class="flex items-center gap-3">
+<button onclick="showModule('notifications')" class="relative w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center"><i class="ri-notification-3-line"></i><span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center">5</span></button>
+<button onclick="showModule('audit')" class="w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center"><i class="ri-history-line"></i></button>
+<select id="schoolSwitcher" onchange="changeSchool(this.value)" class="border rounded-lg px-3 py-2 text-xs font-medium"><option>St. Mary's College Kisubi</option><option>Gayaza High School</option><option>King's College Budo</option><option>New School + Configure</option></select>
+</div>
+</div>
+
+<div class="p-6">
+<div id="mod-dashboard" class="module">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+<div class="bg-white p-5 rounded-2xl border"><p class="text-gray-500 text-xs">Total Students</p><p class="text-3xl font-bold mt-1">1,248</p><p class="text-[11px] text-green-600 mt-1">↑ 12 this term</p></div>
+<div class="bg-white p-5 rounded-2xl border"><p class="text-gray-500 text-xs">Fees Collected</p><p class="text-3xl font-bold mt-1">UGX 84M</p><p class="text-[11px] text-green-600 mt-1">72% paid</p></div>
+<div class="bg-white p-5 rounded-2xl border"><p class="text-gray-500 text-xs">Attendance Today</p><p class="text-3xl font-bold mt-1">94.2%</p><p class="text-[11px] text-red-600 mt-1">16 absent</p></div>
+<div class="bg-white p-5 rounded-2xl border"><p class="text-gray-500 text-xs">Avg Performance</p><p class="text-3xl font-bold mt-1">68.4%</p><p class="text-[11px] text-green-600 mt-1">↑ IMPROVED</p></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4"><div class="md
