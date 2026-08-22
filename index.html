@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Uganda Schools Portal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f5f7fb}
+header{background:#0b5e2f;color:white;padding:20px;text-align:center}
+nav{background:white;padding:12px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+nav a{background:#0b5e2f;color:white;padding:10px 18px;border-radius:20px;text-decoration:none;font-weight:bold}
+.hero{padding:40px 20px;text-align:center}
+.hero a{display:inline-block;margin:8px;padding:14px 22px;border-radius:8px;text-decoration:none;color:white;font-weight:bold}
+.btn1{background:#0b5e2f} .btn2{background:#ff9f00}
+.card{background:white;margin:20px;padding:20px;border-radius:12px}
+input{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;margin:8px 0}
+.school{border-bottom:1px solid #eee;padding:12px 0}
+.school a{color:#0b5e2f;font-weight:bold;text-decoration:none}
+</style>
+</head>
+<body>
+<header><h1>Uganda Schools Portal</h1><p>Find Secondary & Primary Schools</p></header>
+<nav>
+<a href="#schools">Schools</a>
+<a href="#converter">UGX Rates</a>
+<a href="#search">Google Search</a>
+</nav>
+<div class="hero">
+<h2>Find Best School for Your Child</h2>
+<a class="btn1" href="#schools">Find Schools</a>
+<a class="btn2" href="#converter">UGX Converter</a>
+</div>
+<div class="card" id="schools">
+<h3>Top Schools in Uganda</h3>
+<input id="q" placeholder="Search school..." onkeyup="filter()">
+<div id="list"></div>
+</div>
+<div class="card" id="converter">
+<h3>UGX Exchange Rate Today</h3>
+<p>1 USD = 3,720 UGX | 1 EUR = 4,020 UGX</p>
+<input id="ugx" type="number" placeholder="Enter UGX amount" onkeyup="convert()">
+<p id="res"></p>
+</div>
+<div class="card" id="search">
+<h3>Search Any School on Google</h3>
+<input id="gq" placeholder="Type school name">
+<a href="#" onclick="gosearch();return false" style="display:block;background:#0b5e2f;color:white;text-align:center;padding:12px;border-radius:8px;text-decoration:none;margin-top:8px">Search on Google</a>
+</div>
+<script>
+let schools=["Gayaza High School - Wakiso","King's College Budo - Wakiso","Mt St Mary's Namagunga - Mukono","Nabisunsa Girls - Kampala","St Mary's Kitende - Wakiso","Kampala Parents School","Greenhill Academy - Kampala","Seeta High School - Mukono","Buddo SS","Trinity College Nabbingo"];
+let listDiv=document.getElementById('list');
+function show(arr){listDiv.innerHTML=arr.map(s=>`<div class=school><a href="https://www.google.com/search?q=${encodeURIComponent(s)}" target="_blank">${s}</a></div>`).join('')}
+show(schools);
+function filter(){let v=q.value.toLowerCase();show(schools.filter(s=>s.toLowerCase().includes(v)))}
+function convert(){let v=parseFloat(ugx.value)||0;res.innerHTML`= $${(v/3720).toFixed(2)} USD`}
+function gosearch(){let v=document.getElementById('gq').value;if(v) window.open('https://www.google.com/search?q='+encodeURIComponent(v+' Uganda school'),'_blank')}
+</script>
+</body>
+</html>
