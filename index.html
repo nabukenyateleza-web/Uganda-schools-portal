@@ -9,5 +9,5 @@ let MY_WA="256761429404";let curschool="";let schools=[{n:"Buganda Road Primary"
 let cur="all";let gg=document.getElementById('g');function render(){gg.innerHTML="";schools.filter(x=>cur=="all"||x.l==cur).forEach(s=>{gg.innerHTML+=`<div class="c"><b style="font-size:11px">${s.n}</b><br><small>${s.l.toUpperCase()} • ${s.c}</small><br><button onclick="openP('${s.n}','${s.c}','${s.l}')">View Portal</button></div>`})}
 function fil(l,b){cur=l;document.querySelectorAll('.f button').forEach(x=>x.classList.remove('active'));b.classList.add('active');render()}
 function search(){let q=document.getElementById('s').value.toLowerCase();document.querySelectorAll('.c').forEach(c=>{c.style.display=c.innerText.toLowerCase().includes(q)?'block':'none'})}
-function openP(n,c,l){pn.innerText=n;pc.innerText=c;pl.innerText=l.toUpperCase()+" - S2 Active";p.style.display='block'}render();
+function openP(n,c,l){curSchool=n;pn.innerText=n;pc.innerText=c;pl.innerText=l.toUpperCase()+" - S2 ACTIVE - OPEN 2026";p.style.display='block';}function applyWA(){let m=encodeURIComponent("Hello! I want to APPLY for "+curSchool+" ("+pc.innerText+") - Uganda Portal S2 ACTIVE. Send admission 2026.");window.open("https://wa.me/"+MY_WA+"?text="+m,"_blank");}
 </script></body></html>
