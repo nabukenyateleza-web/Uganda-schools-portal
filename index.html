@@ -54,6 +54,23 @@ document.querySelectorAll('.card').forEach(c=>{
 c.style.display=c.innerText.toLowerCase().includes(q)?'block':'none';
 });
 }
+<div id="p" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);z-index:999;padding:15px;box-sizing:border-box">
+<div style="background:#1e1e1e;border:2px solid gold;border-radius:16px;padding:20px;max-width:400px;margin:50px auto;text-align:center">
+<h2 id="pn" style="color:gold">School Name</h2>
+<p>Code: <b id="pc" style="color:white;background:#333;padding:5px 10px;border-radius:6px">ST001</b></p>
+<p style="background:#222;padding:12px;border-radius:10px;text-align:left">Status: <span style="color:#0f0">● S2 Active</span><br>Year: 2025/2026<br>Portal: <b style="color:gold">OPEN</b></p>
+<button onclick="alert('Entering '+document.getElementById('pn').innerText+'! S2 Active')" style="background:gold;color:black;width:100%;padding:14px;border-radius:12px;font-weight:bold;border:none">Enter Portal →</button>
+<button onclick="document.getElementById('p').style.display='none'" style="background:#333;color:white;width:100%;padding:10px;border-radius:10px;border:none;margin-top:10px">Close</button>
+</div>
+</div>
+<script>
+function openP(n,c){document.getElementById('pn').innerText=n;document.getElementById('pc').innerText=c;document.getElementById('p').style.display='block'}
+</script>
+<script>
+let g=document.getElementById('g');g.innerHTML="";let i=0;schools.forEach(s=>{i++;let c=i<10?'ST00'+i:'ST0'+i;g.innerHTML+=`<div class="card"><b>${s}</b><br><small style="color:#888">${c}</small><br><button onclick="openP('${s}','${c}')" style="background:gold;width:100%;padding:6px;border-radius:20px;margin-top:6px;font-weight:bold">View Portal</button></div>`});
+function filter(){let q=document.getElementById('s').value.toLowerCase();document.querySelectorAll('.card').forEach(card=>{card.style.display=card.innerText.toLowerCase().includes(q)?'block':'none'})}
 </script>
 </body>
 </html>
+
+
