@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Uganda-schools-portal - National</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head><body style="background:#0f0f0f;color:white;font-family:Inter,sans-serif">
+
+<div id="national">
+<div style="background:linear-gradient(90deg,#ff7a00,#ffb347);padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
+<div><b>Uganda-schools-portal</b><br><small style="font-size:11px">National Student Management Portal for all schools in Uganda</small></div><div style="display:flex;gap:6px"><span style="background:rgba(0,0,0,0.2);padding:4px 8px;border-radius:20px;font-size:10px">#1 Uganda Martyrs Lubaga</span><span style="background:rgba(0,0,0,0.2);padding:4px 8px;border-radius:20px;font-size:10px">#2 St Jude Kakooge Primary</span></div>
+</div>
+
+<div style="padding:12px"><input id="search" oninput="filterSchools()" placeholder="Search school, district..." style="width:100%;background:#1e1e1e;border:1px solid #333;padding:10px;border-radius:10px;color:white;font-size:13px"></div>
+<div style="padding:0 12px 8px;font-size:11px;color:#888">Total: <span id="count">1041</span> schools | #1 Uganda Martyrs | #2 St Jude Kakooge Primary</div>
+
+<div style="padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px" id="schoolGrid">
+
+<div class="school-card" data-name="uganda martyrs high school lubaga kampala" style="background:#1a1a1a;border:1px solid #ff7a00;border-radius:12px;padding:12px"><span style="background:#ff7a00;color:black;font-size:10px;font-weight:800;padding:3px 6px;border-radius:6px">#1 RANKED UGANDA</span><div style="font-weight:800;margin-top:6px;font-size:13px">Uganda Martyrs High School Lubaga</div><small style="color:#aaa;font-size:11px">Kampala | Secondary</small><br><button onclick="openSchool('Uganda Martyrs High School Lubaga')" style="background:#FFD700;color:black;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:bold;margin-top:8px">Contact</button></div>
+
+<div class="school-card" data-name="st jude kakooge primary school nakasongola" style="background:#1a1a1a;border:1px solid #444;border-radius:12px;padding:12px"><span style="background:#fff;color:black;font-size:10px;font-weight:800;padding:3px 6px;border-radius:6px">#2 RANKED UGANDA</span><div style="font-weight:800;margin-top:6px;font-size:13px;color:#FFD700">St Jude Kakooge Primary School</div><small style="color:#aaa;font-size:11px">Kakooge, Nakasongola | Primary (P1-P7) • Est. 2005</small><br><small style="color:#aaa;font-size:10px">Students: 412</small><br><button onclick="openSchool('St Jude Kakooge Primary School')" style="background:#FFD700;color:black;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:bold;margin-top:8px">Contact</button></div>
+
+<div class="school-card" data-name="gayaza high school wakiso" style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:12px"><small style="color:#aaa">Private</small><div style="font-weight:700;font-size:13px">Gayaza High School</div><small style="color:#aaa;font-size:11px">Wakiso | Secondary</small><br><button onclick="openSchool('Gayaza High School')" style="background:#FFD700;color:black;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:bold;margin-top:8px">Contact</button></div>
+
+<div class="school-card" data-name="kings college budo wakiso" style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:12px"><small style="color:#aaa">Private</small><div style="font-weight:700;font-size:13px">Kings College Budo</div><small style="color:#aaa;font-size:11px">Wakiso | Secondary</small><br><button onclick="openSchool('Kings College Budo')" style="background:#FFD700;color:black;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:bold;margin-top:8px">Contact</button></div>
+
+<div class="school-card" data-name="namiryango college mukono" style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:12px"><small style="color:#aaa">Private</small><div style="font-weight:700;font-size:13px">Namiryango College</div><small style="color:#aaa;font-size:11px">Mukono | Secondary</small><br><button onclick="openSchool('Namiryango College')" style="background:#FFD700;color:black;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:bold;margin-top:8px">Contact</button></div>
+
+<div class="school-card" data-name="trinity college nabbingo wakiso" style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:12px"><small style="color:#aaa">Private</small><div style="font-weight:700;font-size:13px">Trinity College Nabbingo</div><small style="color:#aaa;font-size:11px">Wakiso | Secondary</small><br><button onclick="openSchool('Trinity College Nabbingo')" style="background:#FFD700;color:black;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:bold;margin-top:8px">Contact</button></div>
+
+<div class="school-card" data-name="mtare school mbarara" style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:12px"><small style="color:#aaa">Public</small><div style="font-weight:700;font-size:13px">Mtare School</div><small style="color:#aaa;font-size:11px">Mbarara | Secondary</small><br><button onclick="openSchool('Mtare School')" style="background:#FFD700;color:black;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:bold;margin-top:8px">Contact</button></div>
+
+<div class="school-card" data-name="mbarara high school mbarara" style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:12px"><small style="color:#aaa">Public</small><div style="font-weight:700;font-size:13px">Mbarara High School</div><small style="color:#aaa;font-size:11px">Mbarara | Secondary</small><br><button onclick="openSchool('Mbarara High School')" style="background:#FFD700;color:black;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:bold;margin-top:8px">Contact</button></div>
+
+</div>
+<p style="text-align:center;padding:20px;font-size:11px;color:#666">https://nabukenyateleza-web.github.io/Uganda-schools-portal/?v=123<br>Showing top schools - Search to filter 1041 schools - #2 now St Jude Kakooge Primary School (changed)</p>
+</div>
+
+<div id="parentView" style="display:none;background:#f1f5f9;min-height:100vh;padding:12px;color:black">
+<div style="background:#0f2a52;color:white;border-radius:16px;padding:12px;display:flex;justify-content:space-between"><b id="schoolTitle">St Jude Kakooge Primary School</b><button onclick="back()" style="background:white;color:#0f2a52;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:bold">Back to National Portal</button></div>
+
+<div style="background:white;border-radius:16px;padding:14px;margin-top:12px;border:1px solid #e2e8f0;display:flex;gap:10px;align-items:center">
+<div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(to bottom right,#60a5fa,#2563eb);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold">NF</div>
+<div><b style="font-size:13px">Hello, Nakato Florence 👋</b><br><small style="color:gray;font-size:11px">Parent Portal - <span class="schoolName">St Jude Kakooge Primary School</span></small></div>
+</div>
+
+<div style="background:white;border-radius:16px;margin-top:12px;border:1px solid #e2e8f0;overflow:hidden"><div style="padding:10px;background:#f0f7ff;font-weight:800;font-size:12px">1. STUDENT INFORMATION - 2 columns</div><div style="padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px"><div>Name: <b>Brian Nakato</b><br>Adm: <b>ST1234</b><br>Class: <b>P.6 A</b></div><div>School: <b class="schoolName">St Jude Kakooge Primary School</b><br>Year: <b>2024</b><br>Teacher: <b>Mr. Ssempijja</b></div></div></div>
+
+<div style="background:white;border-radius:16px;margin-top:12px;border:1px solid #e2e8f0;overflow:hidden"><div style="padding:10px;background:#f0fdf4;font-weight:800;font-size:12px">2. FEES INFORMATION - 5 boxes</div><div style="padding:14px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:6px;text-align:center;font-size:11px"><div>Total<br><b>1,200,000</b></div><div>Paid<br><b style="color:green">800,000</b></div><div>Balance<br><b style="color:red">400,000</b></div><div>Due<br><b>31 Aug</b></div><div>Status<br><b style="color:red">Outstanding</b></div></div></div>
+
+<div style="background:white;border-radius:16px;margin-top:12px;border:1px solid #e2e8f0;overflow:hidden"><div style="padding:10px;background:#faf5ff;font-weight:800;font-size:12px">3. ACADEMIC PERFORMANCE - 70% 80% 90% IMPROVED</div><div style="padding:14px;font-size:11px"><table style="width:100%;border-collapse:collapse"><tr style="background:#f8fafc;color:gray"><th style="text-align:left;padding:6px">Assessment</th><th>Total</th><th>Scored</th><th>%</th><th>Pos</th><th>Trend</th></tr><tr style="border-bottom:1px solid #eee"><td style="padding:6px">Beginning</td><td style="text-align:center">600</td><td style="text-align:center">420</td><td style="text-align:center">70%</td><td style="text-align:center">18/45</td><td>—</td></tr><tr style="border-bottom:1px solid #eee"><td style="padding:6px">Mid Term</td><td style="text-align:center">600</td><td style="text-align:center">480</td><td style="text-align:center">80%</td><td style="text-align:center">12/45</td><td style="color:green">↗ Improved</td></tr><tr style="border-bottom:1px solid #eee"><td style="padding:6px">End Term</td><td style="text-align:center">600</td><td style="text-align:center">540</td><td style="text-align:center">90%</td><td style="text-align:center">8/45</td><td style="color:green">↗ Improved</td></tr></table><div style="margin-top:10px"><canvas id="c" height="90"></canvas></div><div style="margin-top:8px;background:#f8fafc;padding:8px;border-radius:8px"><b style="color:green;font-size:11px">Overall IMPROVED ↗</b></div></div></div>
+
+<div style="background:white;border-radius:16px;margin-top:12px;border:1px solid #e2e8f0;overflow:hidden"><div style="padding:10px;background:#eff6ff;font-weight:800;font-size:12px">4. ATTENDANCE - 85/5/2/94%</div><div style="padding:14px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;text-align:center;font-size:11px"><div style="background:#f8fafc;padding:10px;border-radius:10px">Present<br><b>85</b></div><div style="background:#fef2f2;padding:10px;border-radius:10px">Absent<br><b style="color:red">5</b></div><div style="background:#fffbeb;padding:10px;border-radius:10px">Late<br><b style="color:orange">2</b></div><div style="background:#eff6ff;padding:10px;border-radius:10px">%<br><b style="color:blue">94%</b></div></div></div>
+
+<div style="background:white;border-radius:16px;margin-top:12px;border:1px solid #e2e8f0;overflow:hidden;margin-bottom:40px"><div style="padding:10px;background:#faf5ff;font-weight:800;font-size:12px">5. ANNOUNCEMENTS</div><div style="padding:14px;font-size:11px"><div><b style="color:#7c3aed">Parents' Meeting - <span class="schoolName">St Jude Kakooge Primary</span></b><br><small>Friday 24th May 10am school hall</small></div><hr style="margin:10px 0"><div><b>End Term Exams</b><br><small>10th June. Clear fees balance.</small></div></div></div>
+
+<div style="background:white;border-radius:16px;padding:12px;border:1px solid #e2e8f0;margin-bottom:20px"><b style="font-size:12px">Head=Everything | Deputy=His roles | DOS=His roles | Teacher=Assigned only | Parent=Child1 Child2 SECURE</b><br><small style="font-size:10px;color:gray">Audit log, Multi-school isolated, Data secure per school, MTN MoMo *165*3# Airtel *185*9#</small></div>
+</div>
+
+<script>
+function openSchool(name){document.getElementById('national').style.display='none';document.getElementById('parentView').style.display='block';document.getElementById('schoolTitle').innerText=name;document.querySelectorAll('.schoolName').forEach(e=>e.innerText=name);setTimeout(draw,300);window.scrollTo(0,0);}
+function back(){document.getElementById('parentView').style.display='none';document.getElementById('national').style.display='block';}
+function filterSchools(){let q=document.getElementById('search').value.toLowerCase();let cards=document.querySelectorAll('.school-card');let c=0;cards.forEach(card=>{let name=card.getAttribute('data-name');if(name.includes(q)){card.style.display='block';c++;}else{card.style.display='none';}});document.getElementById('count').innerText=c||'1041';}
+function draw(){let el=document.getElementById('c');if(!el)return;new Chart(el,{type:'line',data:{labels:['Beg 70%','Mid 80%','End 90%'],datasets:[{data:[70,80,90],borderColor:'#9333ea',backgroundColor:'rgba(147,51,234,0.1)',tension:0.4,fill:true}]},options:{plugins:{legend:{display:false}},scales:{y:{min:60,max:100},x:{grid:{display:false}}}}});}
+</script>
+</body></html>
