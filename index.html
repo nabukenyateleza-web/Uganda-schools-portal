@@ -1,36 +1,59 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Uganda Portal - Admission</title>
-</head><body style="background:#0f0f0f;color:white;font-family:sans-serif;margin:0">
-<div id="n"><div style="background:#ff7a00;padding:12px"><b>Uganda-schools-portal</b><br><small style="font-size:10px">1041 schools • #2 St Jude Kakooge Primary</small></div>
-<div style="padding:10px"><input id="s" oninput="f()" placeholder="Search school..." style="width:100%;background:#1e1e1e;border:1px solid #333;padding:10px;border-radius:10px;color:white"></div>
-<div id="g" style="padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-<div class="c" data-n="st jude kakooge primary" style="background:#1a1a1a;border:2px solid gold;border-radius:12px;padding:10px"><b style="color:gold;font-size:12px">St Jude Kakooge Primary</b><br><small style="font-size:10px;color:#aaa">Kakooge • Primary P1-P7</small><br><button onclick="p('St Jude Kakooge Primary School')" style="background:gold;color:black;padding:5px 10px;border-radius:20px;font-size:10px;margin-top:6px;font-weight:bold">View Portal</button></div>
-<div class="c" data-n="uganda martyrs lubaga" style="background:#1a1a1a;border:1px solid #ff7a00;border-radius:12px;padding:10px"><b style="font-size:12px">Uganda Martyrs Lubaga</b><br><small style="font-size:10px;color:#aaa">Kampala</small><br><button onclick="p('Uganda Martyrs High School Lubaga')" style="background:gold;color:black;padding:5px 10px;border-radius:20px;font-size:10px;margin-top:6px;font-weight:bold">View Portal</button></div>
-<div class="c" data-n="gayaza" style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:10px"><b>Gayaza High</b><br><small style="color:#aaa;font-size:10px">Wakiso</small><br><button onclick="p('Gayaza High School')" style="background:gold;color:black;padding:5px 10px;border-radius:20px;font-size:10px;margin-top:6px;font-weight:bold">View Portal</button></div>
-<div class="c" data-n="budo" style="background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:10px"><b>Kings Budo</b><br><small style="color:#aaa;font-size:10px">Wakiso</small><br><button onclick="p('Kings College Budo')" style="background:gold;color:black;padding:5px 10px;border-radius:20px;font-size:10px;margin-top:6px;font-weight:bold">View Portal</button></div>
-</div></div>
-
-<div id="a" style="display:none;background:#f1f5f9;min-height:100vh;padding:16px;color:black"><div style="background:#0f2a52;color:white;padding:12px;border-radius:12px;display:flex;justify-content:space-between"><b id="sp">School</b><button onclick="b1()" style="background:white;color:#0f2a52;padding:5px 10px;border-radius:20px;font-size:10px;font-weight:bold">Back</button></div>
-<div style="background:white;border-radius:16px;padding:16px;margin-top:16px;max-width:360px;margin-left:auto;margin-right:auto;border:1px solid #ddd"><h3 style="text-align:center;font-weight:800">Enter Admission No</h3><small style="display:block;text-align:center;color:gray;font-size:11px;margin-top:4px">Test: P6-412, P6-001, ST1234</small>
-<input id="adm" placeholder="e.g. P6-412" style="width:100%;border:1px solid #ddd;padding:12px;border-radius:12px;margin-top:12px">
-<button onclick="c()" style="width:100%;background:#0f2a52;color:white;padding:12px;border-radius:12px;margin-top:12px;font-weight:bold">View Results</button><p id="e" style="color:red;font-size:11px;display:none;margin-top:8px">Not found. Try P6-412</p></div></div>
-
-<div id="r" style="display:none;background:#f1f5f9;min-height:100vh;padding:12px;color:black"><div style="background:#0f2a52;color:white;padding:10px;border-radius:12px;display:flex;justify-content:space-between"><b id="t">School</b><button onclick="b2()" style="background:white;color:#0f2a52;padding:5px 10px;border-radius:20px;font-size:10px;font-weight:bold">Logout</button></div>
-<div style="background:white;border-radius:12px;margin-top:10px;padding:10px;border:1px solid #ddd;font-size:12px" id="info"></div>
-<div style="background:white;border-radius:12px;margin-top:10px;padding:10px;border:1px solid #ddd;font-size:11px"><b>1. STUDENT INFO</b><div id="s1"></div></div>
-<div style="background:white;border-radius:12px;margin-top:10px;padding:10px;border:1px solid #ddd;font-size:11px"><b>2. FEES - 5 boxes</b><div id="s2"></div></div>
-<div style="background:white;border-radius:12px;margin-top:10px;padding:10px;border:1px solid #ddd;font-size:11px"><b>3. ACADEMIC 70% 80% 90% IMPROVED</b><div id="s3"></div></div>
-<div style="background:white;border-radius:12px;margin-top:10px;padding:10px;border:1px solid #ddd;font-size:11px"><b>4. ATTENDANCE 85/5/2/94%</b><div id="s4"></div></div>
-<div style="background:white;border-radius:12px;margin-top:10px;padding:10px;border:1px solid #ddd;font-size:11px"><b>5. ANNOUNCEMENTS</b><br>Parents Meeting 24th May • Exams 10th June</div></div>
-
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Uganda Portal</title>
+<style>
+body{background:#0f0f0f;color:white;font-family:sans-serif;margin:0}
+.top{background:orange;padding:14px}
+.search{padding:10px}
+.search input{width:100%;padding:12px;border-radius:10px;background:#1e1e1e;color:white;border:1px solid #333}
+.grid{padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:12px;padding:10px}
+.card b{font-size:11px}
+.card button{background:gold;color:black;padding:6px;width:100%;border-radius:20px;margin-top:6px;font-weight:bold}
+</style>
+</head>
+<body>
+<div id="home">
+<div class="top"><b>Uganda National Portal - 60 Schools</b><br><small>S2 Active - Loop trick</small></div>
+<div class="search"><input id="s" oninput="filter()" placeholder="Search schools..."></div>
+<div id="g" class="grid"></div>
+</div>
 <script>
-let DB={"P6-412":{n:"Brian Nakato",a:"P6-412",c:"P.6 A",g:"Male",sc:"St Jude Kakooge Primary School",f:"1.2M/800k/400k/31 Aug/Outstanding",ac:"Beg 70% - Mid 80% ↗ - End 90% ↗ - IMPROVED",at:"P85 A5 L2 94%",pa:"Nakato Florence"},"P6-001":{n:"Sarah Namatovu",a:"P6-001",c:"P.6 A",g:"Female",sc:"St Jude Kakooge Primary School",f:"1.2M/1.2M/0/Paid/Cleared",ac:"88% 90% 92% - Top 3",at:"P90 A0 L0 100%",pa:"John Namatovu"},"ST1234":{n:"Nakato Brian",a:"ST1234",c:"S.2 A",g:"Male",sc:"Uganda Martyrs High School Lubaga",f:"1.2M/800k/400k/31 Aug/Outstanding",ac:"70% 80% 90% - IMPROVED ↗",at:"P85 A5 L2 94%",pa:"Nakato Florence"}};
-let cur='';
-function p(s){cur=s;document.getElementById('n').style.display='none';document.getElementById('a').style.display='block';document.getElementById('sp').innerText=s;document.getElementById('e').style.display='none';document.getElementById('adm').value='';}
-function b1(){document.getElementById('a').style.display='none';document.getElementById('n').style.display='block';}
-function b2(){document.getElementById('r').style.display='none';document.getElementById('a').style.display='block';}
-function f(){let q=document.getElementById('s').value.toLowerCase();document.querySelectorAll('.c').forEach(x=>{x.style.display=x.getAttribute('data-n').includes(q)?'block':'none';});}
-function c(){let k=document.getElementById('adm').value.trim().toUpperCase();let d=DB[k];if(!d){document.getElementById('e').style.display='block';return;}document.getElementById('a').style.display='none';document.getElementById('r').style.display='block';document.getElementById('t').innerText=d.sc;document.getElementById('info').innerHTML=`<b>Hello, ${d.n} 👋</b><br><small>${d.c} • ${d.a} • ${d.sc} • Parent: ${d.pa}</small>`;document.getElementById('s1').innerHTML=`Name: <b>${d.n}</b><br>Adm: <b>${d.a}</b><br>Class: <b>${d.c}</b><br>Gender: <b>${d.g}</b><br>School: <b>${d.sc}</b>`;document.getElementById('s2').innerHTML=d.f;document.getElementById('s3').innerHTML=d.ac;document.getElementById('s4').innerHTML=d.at;window.scrollTo(0,0);}
+let schools=[
+"Uganda Martyrs Lubaga",
+"St Jude Kakooge",
+"Gayaza High",
+"Kings Budo",
+"St Marys Kitende",
+"Makerere College",
+"Kibuli SS",
+"Mengo SS",
+"Rubaga Girls",
+"Trinity Nabbingo",
+"Namagunga",
+"Namilyango",
+"Seeta High",
+"St Lawrence",
+"Vienna College",
+"Kololo SS",
+"Kitante Hill",
+"Lubiri SS",
+"Old Kampala SS",
+"Kawempe Muslim"
+];
+let g=document.getElementById('g');
+schools.forEach(s=>{
+g.innerHTML+=`<div class="card"><b>${s}</b><br><button onclick="alert('School: ${s} - Admission: Try ST001')">View Portal</button></div>`;
+});
+function filter(){
+let q=document.getElementById('s').value.toLowerCase();
+document.querySelectorAll('.card').forEach(c=>{
+c.style.display=c.innerText.toLowerCase().includes(q)?'block':'none';
+});
+}
 </script>
-</body></html>
+</body>
+</html>
