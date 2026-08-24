@@ -65,7 +65,31 @@ footer{text-align:center;color:#667085;padding:25px;font-size:12px}
 <div class="school">
 <b>St Jude Kakooge Primary School</b>
 <p class="muted">Primary School • Uganda</p>
-<button class="btn" onclick="chooseSchool('St Jude Kakooge Primary School')">Select School</button>
+<div id="moreSchools"></div>
+<script>
+const extraSchools = [
+"Buganda Road Primary","Nakivubo Primary","Old Kampala Primary","East Kololo Primary","Bat Valley Primary","Kampala Quality Primary","Kitante Primary","Lohana Academy","Aga Khan Primary","Hillside Primary Naalya","Greenhill Primary","Kavule Primary","City Parents","Sir Apollo Kaggwa Primary","St Savio Primary","Kyambogo Primary","Mutesa 1 Primary","Railway Primary","Kiswa Primary","Luzira Primary","Nakawa Primary","Mbuya Primary","Ntinda Primary","Kisaasi Primary","Kyanja Primary","Komamboga Primary","Kawempe Primary","Bwaise Primary","Mengo Primary","Nakateete Primary",
+"Kololo SS","Kitante Hill SS","Mengo SS","Makerere College","Kibuli SS","Old Kampala SS","Nsambya SS","Lubiri SS","Kawempe Muslim SS","Kawempe Royal College","St Peters Nsambya","St Joseph Nsambya","Our Lady Namagunga","Mt St Marys Namagunga","Trinity Nabbingo","Buddo SS","Kings College Budo","Namilyango College","Busoga College Mwiri","Ntare School","St Marys Kisubi","Ndejje SS","Seeta High","Naalya SS","London College St Lawrence","Kampala High","Caltec Academy","Aga Khan High","Kabojja International","Rainbow International","Kampala International School","Ambrosoli International","Heritage International","Acacia International","Galaxy International","Turkish Light Academy","Vienna College","St Lawrence Citizens","St Lawrence Creamland","St Lawrence Paris Palais","Kawempe Decorous",
+"Makerere University","Kyambogo University","MUBS","Mbarara University","Gulu University","Busitema University","Kabale University","KIU","UCU","UMU","IUIU","Nkumba University","Ndejje University","Bugema University","Victoria University","Cavendish University","Team University","Kampala University","Aga Khan University","Islamic University","Mutesa 1 Royal University","St Lawrence University","YMCAs","Multitech Business School","Makerere Business Institute","Cavendish Business School","Uganda Management Institute"
+];
+
+let allSchools = [];
+for(let i=1; i<=2000; i++){
+  let name = extraSchools[i % extraSchools.length] + (i>extraSchools.length ? " "+Math.floor(i/extraSchools.length) : "");
+  let level = name.includes("University") || name.includes("MUBS") || name.includes("Institute") ? "University" : (name.includes("SS") || name.includes("College") || name.includes("High") ? "Secondary" : "Primary");
+  allSchools.push({n:name, l:level});
+}
+
+let container = document.getElementById("moreSchools");
+let html = "";
+allSchools.forEach(s=>{
+  html += `<div class="school" style="border:1px solid #ddd;padding:10px;margin:8px;border-radius:10px">
+  <b>${s.n}</b><p class="muted">${s.l} • Kampala, Uganda</p>
+  <button class="btn" onclick="chooseSchool('${s.n}')">Select School</button>
+  </div>`;
+});
+container.innerHTML = html;
+</script> class="btn" onclick="chooseSchool('St Jude Kakooge Primary School')">Select School</button>
 </div>
 </div>
 
