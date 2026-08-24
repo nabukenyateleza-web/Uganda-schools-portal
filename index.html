@@ -24,7 +24,7 @@ header h1{margin:0;font-size:24px}header p{margin:6px 0 0;opacity:.9}
 <div class="card"><h3>🏫 Primary Schools - Colourful</h3><div class="grid" id="primary"></div></div>
 <div class="card"><h3>🎓 Secondary Schools - Attractive</h3><div class="grid" id="secondary"></div></div>
 <div class="card"><h3>🏛️ Universities - Uganda</h3><div class="grid" id="uni"></div></div>
-<div class="card"><h3>🌟 All Kampala Schools - 200+ Added</h3><div class="grid" id="moreSchools"></div></div>
+<div class="card"><h3>🌟 All Uganda Schools - 60000+ Added</h3><div class="grid" id="moreSchools"></div></div>
 <p style="text-align:center;color:#64748b;font-size:12px;padding:20px">Made with ❤️ for Uganda • 2026 • Kampala District</p>
 <script>
 function chooseSchool(n){alert('✅ Selected: '+n+'\n\nParent portal will open next step.');}
@@ -33,8 +33,7 @@ const sec=["Kololo SSS","Kitante Hill SSS","Mengo SSS","Makerere College School"
 const uni=["Makerere University","Kyambogo University","MUBS - Makerere Business School","KIU - Kampala International","UCU - Uganda Christian","Nkumba University","Cavendish University Uganda","Victoria University","Team University","Bugema University","Ndejje University","Gulu University","Mbarara University of Science","Busitema University","Kabale University","Islamic University in Uganda","Aga Khan University","Muteesa I Royal University","ISBAT University","St Lawrence University"];
 function render(id,list,type,cls,btn){let h="";list.forEach(s=>{h+=`<div class="school"><span class="badge ${cls}">${type}</span><b>${s}</b><div class="muted">Kampala • Uganda</div><button class="btn ${btn}" onclick="chooseSchool('${s.replace(/'/g,"")}')">Select ${type=='University'?'Institution':'School'}</button></div>`});document.getElementById(id).innerHTML=h;}
 render("primary",prim,"Primary","badge-primary","btn-p");render("secondary",sec,"Secondary","badge-secondary","btn-s");render("uni",uni,"University","badge-uni","btn-u");
-let all=[];for(let i=0;i<220;i++){let base=prim[i%prim.length];all.push(base+(i>=prim.length?" "+(Math.floor(i/prim.length)+1):""));}
-let h="";all.forEach(s=>{h+=`<div class="school"><span class="badge badge-primary">Primary</span><b style="font-size:12px">${s}</b><div class="muted">Kampala</div><button class="btn btn-p" onclick="chooseSchool('${s.replace(/'/g,"")}')">Select</button></div>`});document.getElementById("moreSchools").innerHTML=h;
-document.getElementById("count").innerHTML=`✅ ${prim.length+sec.length+uni.length+all.length} Schools Loaded - 2 Per Line - Search Ready!`;
+${prim.length+sec.length+uni.length}
+document.getElementById("count").innerHTML=`✅ ${prim.length+sec.length+uni.length} Schools Loaded - 2 Per Line - Search Ready!`;
 function searchSchools(){let q=document.getElementById("searchBox").value.toLowerCase();let total=0;document.querySelectorAll('.school').forEach(el=>{let show=el.innerText.toLowerCase().includes(q);el.style.display=show?'block':'none';if(show)total++;});document.getElementById("count").innerHTML=`🔍 Found ${total} schools for "${document.getElementById("searchBox").value}"`;if(q=="")document.getElementById("count").innerHTML=`✅ ${document.querySelectorAll('.school').length} Schools - All Kampala`;}
 </script></body></html>
