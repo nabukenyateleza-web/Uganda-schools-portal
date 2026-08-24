@@ -1,151 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Uganda Schools Portal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Uganda Schools Portal</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background: #f4f7fb;
-      color: #17233c;
-    }
-
-    header {
-      background: #08265c;
-      color: white;
-      padding: 22px 18px;
-      text-align: center;
-    }
-
-    header h1 {
-      font-size: 25px;
-      margin-bottom: 6px;
-    }
-
-    header p {
-      font-size: 14px;
-      opacity: 0.9;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 25px 18px;
-    }
-
-    .welcome {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .welcome h2 {
-      margin-bottom: 8px;
-    }
-
-    .welcome p {
-      color: #667085;
-    }
-
-    .category {
-      background: white;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-    }
-
-    .category h3 {
-      margin-bottom: 15px;
-      color: #08265c;
-    }
-
-    .school {
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 15px;
-      margin-top: 10px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .school:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 12px rgba(0,0,0,0.08);
-    }
-
-    .school strong {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .school span {
-      font-size: 13px;
-      color: #667085;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #667085;
-      font-size: 13px;
-    }
-  </style>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#f4f7fb;color:#17233c}
+button{border:0;cursor:pointer}
+.header{background:#08265c;color:white;padding:20px;text-align:center}
+.header h1{font-size:24px}
+.header p{margin-top:6px;font-size:13px;opacity:.9}
+.container{max-width:900px;margin:auto;padding:20px}
+.card{background:white;border-radius:16px;padding:20px;margin-bottom:16px;box-shadow:0 4px 15px #00000010}
+h2{margin-bottom:8px}
+h3{margin-bottom:12px;color:#08265c}
+p{line-height:1.5}
+.muted{color:#667085;font-size:14px}
+.btn{background:#08265c;color:white;padding:13px 18px;border-radius:9px;margin-top:12px}
+.btn.secondary{background:#e9eef8;color:#08265c}
+.school{border:1px solid #dde3ee;border-radius:12px;padding:16px;margin-top:10px}
+.school button{margin-top:10px}
+.hidden{display:none}
+input,select{width:100%;padding:13px;margin:7px 0 12px;border:1px solid #ccd4e0;border-radius:9px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+.badge{display:inline-block;background:#e8f7ed;color:#18753c;padding:6px 10px;border-radius:20px;font-size:12px}
+.statgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.stat{background:#f5f7fb;padding:15px;border-radius:12px}
+.stat strong{font-size:20px;display:block;margin-top:5px}
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.menu button{background:white;border:1px solid #dce3ee;padding:15px;border-radius:12px;text-align:left}
+.menu b{display:block;margin-bottom:4px}
+.progress{height:12px;background:#e4e8ef;border-radius:20px;overflow:hidden;margin-top:8px}
+.progress div{height:100%;background:#18753c}
+table{width:100%;border-collapse:collapse}
+td,th{padding:10px;border-bottom:1px solid #eee;text-align:left;font-size:13px}
+.good{color:#18753c;font-weight:bold}
+.warning{color:#b56b00;font-weight:bold}
+.announcement{border-left:4px solid #08265c;padding:12px;background:#f7f9fc;margin-bottom:10px}
+canvas{width:100%;height:220px;border:1px solid #edf0f5;border-radius:10px}
+footer{text-align:center;color:#667085;padding:25px;font-size:12px}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <h1>🇺🇬 Uganda Schools Portal</h1>
-    <p>School Management & Parent Portal</p>
-  </header>
+<header class="header">
+<h1>🇺🇬 Uganda Schools Portal</h1>
+<p>School Management & Parent Portal</p>
+</header>
 
-  <main class="container">
+<div class="container">
 
-    <section class="welcome">
-      <h2>Welcome</h2>
-      <p>Select an institution to continue.</p>
-    </section>
+<!-- HOME -->
+<section id="home">
+<div class="card">
+<h2>Welcome</h2>
+<p class="muted">Select an institution to continue.</p>
+</div>
 
-    <section class="category">
-      <h3>🏫 Primary Schools</h3>
+<div class="card">
+<h3>🏫 Primary Schools</h3>
+<div class="school">
+<b>St Jude Kakooge Primary School</b>
+<p class="muted">Primary School • Uganda</p>
+<button class="btn" onclick="chooseSchool('St Jude Kakooge Primary School')">Select School</button>
+</div>
+</div>
 
-      <div class="school">
-        <strong>St Jude Kakooge Primary School</strong>
-        <span>Primary School • Uganda</span>
-      </div>
-    </section>
+<div class="card">
+<h3>🎓 Secondary Schools</h3>
+<div class="school">
+<b>Uganda Martyrs High School Lubaga</b>
+<p class="muted">Secondary School • Uganda</p>
+<button class="btn" onclick="chooseSchool('Uganda Martyrs High School Lubaga')">Select School</button>
+</div>
+</div>
 
-    <section class="category">
-      <h3>🎓 Secondary Schools</h3>
+<div class="card">
+<h3>🏛️ Universities</h3>
+<div class="school">
+<b>Makerere University</b>
+<p class="muted">University • Uganda</p>
+<button class="btn" onclick="chooseSchool('Makerere University')">Select Institution</button>
+</div>
+</div>
+</section>
 
-      <div class="school">
-        <strong>Uganda Martyrs High School Lubaga</strong>
-        <span>Secondary School • Uganda</span>
-      </div>
-    </section>
+<!-- LOGIN -->
+<section id="login" class="hidden">
+<div class="card">
+<h2>🔐 School Portal Login</h2>
+<p class="muted" id="selectedSchool"></p>
 
-    <section class="category">
-      <h3>🏛️ Universities</h3>
+<label>Account type</label>
+<select id="accountType">
+<option value="parent">Parent</option>
+<option value="staff">School Staff</option>
+</select>
 
-      <div class="school">
-        <strong>Makerere University</strong>
-        <span>University • Uganda</span>
-      </div>
-    </section>
+<label>Email / Phone</label>
+<input placeholder="Enter email or phone">
 
-  </main>
+<label>Password</label>
+<input type="password" placeholder="Enter password">
 
-  <footer>
-    Uganda Schools Portal © 2026
-  </footer>
+<button class="btn" onclick="login()">Login</button>
+<button class="btn secondary" onclick="show('home')">Back</button>
+
+<p class="muted" style="margin-top:15px">
+Demo: enter anything and tap Login.
+</p>
+</div>
+</section>
+
+<!-- PARENT DASHBOARD -->
+<section id="parent" class="hidden">
+
+<div class="topbar">
+<div>
+<h2>Parent Dashboard</h2>
+<p class="muted">Uganda Martyrs High School Lubaga</p>
+</div>
+<button class="btn" onclick="show('home')">Logout</button>
+</div>
+
+<div class="card">
+<h3>👨‍🎓 Select Student</h3>
+<select onchange="changeStudent(this.value)">
+<option value="brian">Nakato Brian — S.2 A</option>
+<option value="mary">Nakato Mary — S.5 A</option>
+</select>
+<p class="muted">Only one student's information is displayed at a time.</p>
+</div>
+
+<div class="card">
+<h3>Student Profile</h3>
+<div class="statgrid">
+<div class="stat">Name<strong id="studentName">Nakato Brian</strong></div>
+<div class="stat">Class<strong id="studentClass">S.2 A</strong></div>
+<div class="stat">Admission No.<strong id="studentAdmission">UMHL001</strong></div>
+<div class="stat">Gender<strong>Male</strong></div>
+</div>
+</div>
+
+<div class="card">
+<h3>💰 School Fees</h3>
+<div class="statgrid">
+<div class="stat">Required<strong>UGX 800,000</strong></div>
+<div class="stat">Paid<strong>UGX 600,000</strong></div>
+<div class="stat">Balance<strong class="warning">UGX 200,000</strong></div>
+<div class="stat">Due Date<strong>15/09/2026</strong></div>
+</div>
+</div>
+
+<div class="card">
+<h3>📊 Academic Performance</h3>
+<span class="badge">↗ IMPROVED</span>
+<table>
+<tr><th>Assessment</th><th>Average</th><th>Position</th></tr>
+<tr><td>Beginning Term</td><td>68%</td><td>18th</td></tr>
+<tr><td>Mid Term</td><td>74%</td><td>14th</td></tr>
+<tr><td>End Term</td><td>82%</td><td>11th</td></tr>
+</table>
+<br>
+<p><b>Performance summary:</b></p>
+<p class="muted">The student's overall performance improved throughout the term, with the class position moving from 18th to 11th.</p>
+</div>
+
+<div class="card">
+<h3>📈 Performance Graph</h3>
+<canvas id="graph"></canvas>
+</div>
+
+<div class="card">
+<h3>🕐 Attendance</h3>
+<div class="statgrid">
+<div class="stat">Present<strong>54</strong></div>
+<div class="stat">Absent<strong>3</strong></div>
+<div class="stat">Late<strong>2</strong></div>
+<div class="stat">Attendance<strong class="good">91%</strong></div>
+</div>
+<div class="progress"><div style="width:91%"></div></div>
+</div>
+
+<div class="card">
+<h3>👨‍🏫 Class Teacher's Comment</h3>
+<p>"The student has shown good improvement this term. Continue working hard and participating actively in class."</p>
+</div>
+
+<div class="card">
+<h3>📢 School Announcements</h3>
+<div class="announcement">
+<b>Parents' Meeting</b>
+<p class="muted">Parents' meeting will be held on Friday at 10:00 AM.</p>
+</div>
+<div class="announcement">
+<b>End of Term Examination</b>
+<p class="muted">Examinations begin on 20 September.</p>
+</div>
+</div>
+
+</section>
+
+<!-- STAFF DASHBOARD -->
+<section id="staff" class="hidden">
+
+<div class="topbar">
+<div>
+<h2>🏫 Staff Dashboard</h2>
+<p class="muted">Uganda Martyrs High School Lubaga</p>
+</div>
+<button class="btn" onclick="show('home')">Logout</button>
+</div>
+
+<div class="card">
+<h3>Staff Role</h3>
+<select>
+<option>Head Teacher</option>
+<option>Deputy Head Teacher 1</option>
+<option>Deputy Head Teacher 2</option>
+<option>Director of Studies 1</option>
+<option>Director of Studies 2</option>
+<option>Teacher</option>
+</select>
+</div>
+
+<div class="menu">
+<button><b>👨‍🎓 Students</b><span class="muted">Manage student records</span></button>
+<button><b>📚 Academics</b><span class="muted">Exams and results</span></button>
+<button><b>💰 Fees</b><span class="muted">Payments and balances</span></button>
+<button><b>🕐 Attendance</b><span class="muted">Record attendance</span></button>
+<button><b>📢 Announcements</b><span class="muted">Send school notices</span></button>
+<button><b>📋 Reports</b><span class="muted">Student and school reports</span></button>
+</div>
+
+<div class="card" style="margin-top:16px">
+<h3>🔒 Access Control</h3>
+<p class="muted">
+In the real version, every staff role will receive only the permissions assigned to that role.
+</p>
+</div>
+
+</section>
+
+</div>
+
+<footer>
+Uganda Schools Portal © 2026
+</footer>
+
+<script>
+
+let selectedSchool="";
+
+const students={
+brian:{
+name:"Nakato Brian",
+class:"S.2 A",
+admission:"UMHL001"
+},
+mary:{
+name:"Nakato Mary",
+class:"S.5 A",
+admission:"UMHL002"
+}
+};
+
+function show(id){
+document.querySelectorAll("section").forEach(x=>x.classList.add("hidden"));
+document.getElementById(id).classList.remove("hidden");
+window.scrollTo(0,0);
+
+if(id==="parent"){
+setTimeout(drawGraph,100);
+}
+}
+
+function chooseSchool(school){
+selectedSchool=school;
+document.getElementById("selectedSchool").innerText=
+"Selected institution: "+school;
+show("login");
+}
+
+function login(){
+let type=document.getElementById("accountType").value;
+
+if(type==="parent"){
+show("parent");
+}else{
+show("staff");
+}
+}
+
+function changeStudent(id){
+let s=students[id];
+
+document.getElementById("studentName").innerText=s.name;
+document.getElementById("studentClass").innerText=s.class;
+document.getElementById("studentAdmission").innerText=s.admission;
+}
+
+function drawGraph(){
+
+let canvas=document.getElementById("graph");
+if(!canvas)return;
+
+let ctx=canvas.getContext("2d");
+
+canvas.width=canvas.clientWidth*2;
+canvas.height=220*2;
+ctx.scale(2,2);
+
+let w=canvas.clientWidth;
+let h=220;
+
+ctx.clearRect(0,0,w,h);
+
+let values=[68,74,82];
+let labels=["Beginning","Mid Term","End Term"];
+
+ctx.beginPath();
+
+values.forEach((v,i)=>{
+
+let x=50+i*(w-100)/2;
+let y=h-30-(v-60)*4;
+
+if(i===0)ctx.moveTo(x,y);
+else ctx.lineTo(x,y);
+
+ctx.fillText(labels[i],x-25,h-8);
+});
+
+ctx.stroke();
+
+values.forEach((v,i)=>{
+
+let x=50+i*(w-100)/2;
+let y=h-30-(v-60)*4;
+
+ctx.beginPath();
+ctx.arc(x,y,5,0,Math.PI*2);
+ctx.fill();
+
+ctx.fillText(v+"%",x-12,y-12);
+
+});
+
+}
+
+show("home");
+
+</script>
 
 </body>
 </html>
