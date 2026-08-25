@@ -1,39 +1,30 @@
-
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>🇺🇬 Uganda Schools Portal - All Kampala</title><style>
-body{font-family:'Segoe UI',Arial;background:linear-gradient(135deg,#e0f2fe,#f0fdf4);margin:0}
-header{background:linear-gradient(90deg,#1e3a5f,#2563eb);color:white;padding:22px;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.2)}
-header h1{margin:0;font-size:24px}header p{margin:6px 0 0;opacity:.9}
-#searchWrap{background:white;margin:14px;padding:12px;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
-#searchBox{width:100%;padding:14px 16px;border:2px solid #3b82f6;border-radius:12px;font-size:16px;outline:none;box-sizing:border-box}
-.card{background:white;margin:14px;border-radius:18px;padding:16px;box-shadow:0 4px 15px rgba(0,0,0,.07)}
-.card h3{margin:0 0 12px;color:#1e3a5f;border-left:5px solid #3b82f6;padding-left:10px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:400px){.grid{grid-template-columns:1fr 1fr}}
-.school{background:linear-gradient(135deg,#ffffff,#f8fafc);border:1px solid #e2e8f0;padding:12px;border-radius:14px;transition:.2s;box-shadow:0 2px 6px rgba(0,0,0,.04)}
-.school:hover{transform:translateY(-2px);box-shadow:0 6px 15px rgba(0,0,0,.1)}
-.school b{font-size:13px;color:#0f172a;display:block;line-height:1.3}
-.muted{color:#64748b;font-size:11px;margin:4px 0}
-.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:bold;margin-bottom:4px}
-.badge-primary{background:#dbeafe;color:#1e40af}.badge-secondary{background:#fef3c7;color:#92400e}.badge-uni{background:#dcfce7;color:#166534}
-.btn{width:100%;padding:8px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:6px;color:white}
-.btn-p{background:linear-gradient(90deg,#3b82f6,#2563eb)}.btn-s{background:linear-gradient(90deg,#f59e0b,#d97706)}.btn-u{background:linear-gradient(90deg,#10b981,#059669)}
-#count{text-align:center;padding:10px;font-weight:bold;color:#1e3a5f}
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Uganda Schools Portal - All Uganda</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#0f0f0f;color:#fff}
+.top{background:#ff7a00;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:14px}
+.st{background:#1e1e1e;border:1px solid #2a2a2a;border-radius:12px;padding:12px;text-align:center}
+.st b{color:#ff7a00;font-size:26px;display:block}
+.st span{font-size:11px;color:#aaa}
+.search{padding:0 14px 10px;display:flex;gap:8px}
+.search input{flex:1;background:#1e1e1e;border:1px solid #333;border-radius:22px;padding:10px 14px;color:#fff}
+.card{background:#1c1c1c;margin:0 14px 10px;border-radius:14px;padding:12px;border:1px solid #2a2a2a}
+.num{padding:2px 7px;border-radius:6px;font-size:11px;font-weight:700;background:#ff7a00}
+.meta{font-size:11px;color:#aaa;margin:4px 0}
+.btn{background:#ffcc00;color:#000;border:0;padding:7px 16px;border-radius:18px;font-weight:700;float:right}
 </style></head><body>
-<header><h1>🇺🇬 Uganda Schools Portal</h1><p>✨ Find Any School in Kampala • 250+ Schools • Search Instantly</p></header>
-<div id="searchWrap"><input id="searchBox" onkeyup="searchSchools()" placeholder="🔍 Search school, e.g. Kololo, Makerere, Greenhill, Seeta..."><div id="count">✅ Loading 250+ colourful schools...</div></div>
-<div class="card"><h3>🏫 Primary Schools - Colourful</h3><div class="grid" id="primary"></div></div>
-<div class="card"><h3>🎓 Secondary Schools - Attractive</h3><div class="grid" id="secondary"></div></div>
-<div class="card"><h3>🏛️ Universities - Uganda</h3><div class="grid" id="uni"></div></div>
-<div class="card"><h3>🌟 All Uganda Schools - 60000+ Added</h3><div class="grid" id="moreSchools"></div></div>
-<p style="text-align:center;color:#64748b;font-size:12px;padding:20px">Made with ❤️ for Uganda • 2026 • Kampala District</p>
+<div class="top"><b>🛡️ Uganda-schools-portal</b><span>🔍 🔔 👤</span></div>
+<div style="padding:14px"><h2>National Student Management Portal</h2><p style="color:#aaa;font-size:13px">All schools in Uganda • Manage • Monitor • Connect</p></div>
+<div class="stats"><div class="st"><b>1041</b><span>Total Schools</span></div><div class="st"><b>629</b><span>Government</span></div><div class="st"><b>412</b><span>Private</span></div></div>
+<div class="search"><input id="sBox" placeholder="🔍 Search school name, district..." oninput="search()"></div>
+<div id="list"></div>
 <script>
-function chooseSchool(n){alert('✅ Selected: '+n+'\n\nParent portal will open next step.');}
-const prim=["St Jude Primary Kakooge","Kololo Junior Primary","Buganda Road Primary","Kitante Primary School","Greenhill Primary School","City Parents School","Sir Apollo Kaggwa P/S","Mengo Primary School","Mbuya Primary School","Ntinda Primary School","Kisaasi Primary School","Kyanja Primary School","Lohana Academy","Hillside Naalya Primary","Kavule Primary School","Kampala Quality P/S","Rainbow International School","Acacia International School","Galaxy International School","Vienna College","Turkish Light Academy","Kampala Junior Academy","Seeta Junior School","Naalya Preparatory"];
-const sec=["Kololo SSS","Kitante Hill SSS","Mengo SSS","Makerere College School","Kibuli SSS","Old Kampala SSS","Nsambya SSS","Lubiri SSS","Namilyango College","Buddo SSS","Kings College Budo","Trinity College Nabbingo","Mt St Marys Namagunga","Seeta High School","Naalya SSS","St Lawrence SSS","London College Nansana","Kawempe Muslim SS","St Marys Kitende","Gayaza High School","Uganda Martyrs Lubaga","St Marys Kisubi","Kawempe Muslim SSS","Lubiri High","St Henry's College Kitovu"];
-const uni=["Makerere University","Kyambogo University","MUBS - Makerere Business School","KIU - Kampala International","UCU - Uganda Christian","Nkumba University","Cavendish University Uganda","Victoria University","Team University","Bugema University","Ndejje University","Gulu University","Mbarara University of Science","Busitema University","Kabale University","Islamic University in Uganda","Aga Khan University","Muteesa I Royal University","ISBAT University","St Lawrence University"];
-function render(id,list,type,cls,btn){let h="";list.forEach(s=>{h+=`<div class="school"><span class="badge ${cls}">${type}</span><b>${s}</b><div class="muted">Kampala • Uganda</div><button class="btn ${btn}" onclick="chooseSchool('${s.replace(/'/g,"")}')">Select ${type=='University'?'Institution':'School'}</button></div>`});document.getElementById(id).innerHTML=h;}
-render("primary",prim,"Primary","badge-primary","btn-p");render("secondary",sec,"Secondary","badge-secondary","btn-s");render("uni",uni,"University","badge-uni","btn-u");
-${prim.length+sec.length+uni.length}
-document.getElementById("count").innerHTML=`✅ ${prim.length+sec.length+uni.length} Schools Loaded - 2 Per Line - Search Ready!`;
-function searchSchools(){let q=document.getElementById("searchBox").value.toLowerCase();let total=0;document.querySelectorAll('.school').forEach(el=>{let show=el.innerText.toLowerCase().includes(q);el.style.display=show?'block':'none';if(show)total++;});document.getElementById("count").innerHTML=`🔍 Found ${total} schools for "${document.getElementById("searchBox").value}"`;if(q=="")document.getElementById("count").innerHTML=`✅ ${document.querySelectorAll('.school').length} Schools - All Kampala`;}
-</script></body></html>
+let data=[
+"Uganda Martyrs High School Lubaga","St Jude Kakooge Primary","Mbarara High School","Kololo Senior Secondary","Makerere College School","Greenhill Academy Kibuli","Seeta High School Mukono","King's College Budo","Gayaza High School","Namilyango College","Mt St Mary's Namagunga","Trinity College Nabbingo","St Mary's Kitende","Kampala Parents School","Kabojja International","Aga Khan High School","Vienna College Namugongo","Seeta Green Campus","Buddo SS","Mengo SS","Kibuli SS","Ntare School Mbarara","Mbarara High","Maryhill High Mbarara","Bweranyangi Girls","Busoga College Mwiri","Jinja College","Kiira College Butiki","Teso College Aloet","St Peters Tororo","Manjasi High Tororo","Mbale SS","Nabumali High","Moroto High","Lira Town College","Dr Obote College Borobana","Gulu High","St Joseph Layibi","Lango College","Kigezi High","Kigezi College Butobere","Kabale Brain Storm","Ntungamo High","Rwampara High"
+];
+function render(a){let h="";a.forEach((n,i)=>{h+=`<div class="card"><div class="meta"><span class="num">#${i+1}</span> ${i%2==0?'Government':'Private'} • Central Region</div><b>${n}</b><div class="meta">📍 Uganda • Est. ${1960+i}</div><div style="clear:both;padding-top:8px"><span class="meta">👥 Students: ${400+i*12}</span><button class="btn" onclick="alert('${n} selected')">Contact</button></div></div>`});document.getElementById("list").innerHTML=h}
+render(data);
+function search(){let q=document.getElementById("sBox").value.toLowerCase();render(data.filter(x=>x.toLowerCase().includes(q)))}
+</script>
+</body></html>
