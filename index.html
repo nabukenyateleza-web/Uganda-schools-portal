@@ -1,62 +1,124 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Uganda Portal v2.1</title>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>Uganda-schools-portal</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
-body{background:#0a0a0a;color:#fff;padding-bottom:80px}
-.tm{background:#000;text-align:center;padding:16px;border-bottom:3px solid #d4af37}
-.head{background:#ff7a00;margin:12px;border-radius:18px;padding:12px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:9}
-.stats{display:flex;gap:8px;margin:0 12px}.st{background:#1e1e1e;border:1px solid #333;border-radius:12px;padding:10px;flex:1;text-align:center}.st b{color:#ff7a00;font-size:22px;display:block}
-.search{margin:12px;background:#1e1e1e;border-radius:20px;padding:10px;display:flex;gap:6px;position:sticky;top:52px;z-index:9}.search input{flex:1;background:transparent;border:0;color:#fff;outline:none}
-.card{background:#1e1e1e;border:1px solid #2a2a2a;border-radius:14px;padding:12px;margin:8px 12px;cursor:pointer}
-.card:active{transform:scale(0.98);border-color:#ff7a00}
-.contact{background:#ffcc00;color:#000;border:0;padding:7px 16px;border-radius:10px;font-weight:900;float:right;font-size:12px;cursor:pointer}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:99;padding:14px}
-.box{background:#1e1e1e;border:2px solid #d4af37;border-radius:18px;padding:18px;width:100%;max-width:400px}
-.btn{width:100%;padding:12px;border:0;border-radius:10px;font-weight:800;margin-top:8px;cursor:pointer}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Segoe UI,sans-serif}
+body{background:#0f0f12;color:#fff;padding-bottom:90px}
+.top{position:sticky;top:0;z-index:20;background:#ff7a18;border-radius:0 0 18px 18px;padding:14px 14px;display:flex;align-items:center;justify-content:space-between}
+.top b{display:flex;align-items:center;gap:8px;font-size:16px}.top span{font-size:18px;display:flex;gap:14px}
+.h2{padding:18px 14px 0 14px}.h2 h1{font-size:22px;line-height:1.1}.h2 p{color:#9aa0a6;font-size:12px;margin-top:4px}
+.stats{display:flex;gap:10px;padding:14px}.st{background:#1a1c22;border:1px solid #262830;border-radius:14px;flex:1;padding:14px;text-align:center}.st b{font-size:28px;color:#ff7a18;display:block}.st span{font-size:11px;color:#9aa0a6}
+.searchRow{display:flex;gap:8px;padding:0 14px}.sbox{flex:1;background:#1a1c22;border:1px solid #262830;border-radius:12px;padding:10px 12px;display:flex;gap:8px;align-items:center}.sbox input{flex:1;background:transparent;border:0;color:#fff;outline:none;font-size:13px}
+.fbtn{background:#1a1c22;border:1px solid #262830;border-radius:12px;padding:10px 14px;color:#fff;font-size:13px;font-weight:700;display:flex;gap:6px;align-items:center}
+.chips{display:flex;gap:8px;padding:12px 14px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chip{background:#1a1c22;border:1px solid #262830;border-radius:20px;padding:8px 14px;font-size:12px;color:#9aa0a6;cursor:pointer;flex-shrink:0}.chip.active{background:#ff7a18;border-color:#ff7a18;color:#fff;font-weight:800}
+.head2{padding:0 14px;display:flex;justify-content:space-between;align-items:center;margin-top:4px}.head2 h3{font-size:16px}.head2 span{color:#ff7a18;font-size:12px;font-weight:700;cursor:pointer}
+.card{background:#1a1c22;border:1px solid #262830;border-radius:16px;padding:12px;margin:10px 14px;cursor:pointer}.card:active{border-color:#ff7a18;transform:scale(0.98)}
+.topline{font-size:11px;color:#9aa0a6;display:flex;gap:6px;align-items:center}.num{background:#ff7a18;color:#000;font-weight:900;padding:2px 6px;border-radius:6px;font-size:11px}
+.name{font-weight:800;margin:6px 0;font-size:15px}.loc{font-size:12px;color:#9aa0a6;display:flex;gap:4px;align-items:center}
+.metas{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}.meta{background:#252830;border-radius:8px;padding:5px 8px;font-size:11px;color:#c9cdd3;display:flex;gap:4px;align-items:center}
+.contact{background:#ffcc00;color:#000;border:0;padding:8px 18px;border-radius:12px;font-weight:900;font-size:13px;float:right;margin-top:-34px;cursor:pointer}
+.bottom{position:fixed;left:0;right:0;bottom:0;background:#15171d;border-top:1px solid #262830;display:flex;justify-content:space-around;padding:8px 0 10px 0;z-index:30}.bitem{color:#6b7280;font-size:10px;text-align:center;cursor:pointer;flex:1}.bitem.active{color:#ff7a18}.bitem div{font-size:20px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.88);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+.box{background:#1a1c22;border:2px solid #ff7a18;border-radius:18px;padding:18px;width:100%;max-width:380px}
+.btn{width:100%;padding:12px;border:0;border-radius:12px;font-weight:800;margin-top:8px;cursor:pointer}
+.logoBar{background:#000;text-align:center;padding:10px;border-bottom:2px solid #d4af37}
+.logoBar img{width:92%;max-width:380px;border-radius:14px}
 </style></head><body>
 
-<div class="tm">
-<div style="background:#000;border:2px solid #d4af37;border-radius:18px;padding:12px;max-width:360px;margin:0 auto">
-<div style="color:#d4af37;font-size:28px">👑</div>
-<div style="width:84px;height:84px;border:2px solid #d4af37;border-radius:50%;margin:6px auto;display:flex;align-items:center;justify-content:center;font-size:32px;background:#111">📖</div>
-<div style="color:#d4af37;font-weight:900">UGANDA SCHOOL</div>
-<div style="color:#d4af37;font-size:11px">School Portal • v2.1 • 🇺🇬 Kampala</div>
-</div>
-</div>
+<!-- YOUR REAL GOLD LOGO ON TOP -->
+<div class="logoBar"><img src="logo.png" alt="logo" onerror="this.style.display='none'"><div style="color:#d4af37;font-size:11px;margin-top:4px;display:none" id="logoText">UGANDA SCHOOL • School Portal v2.1 • Kampala</div></div>
 
-<div class="head"><b>🛡️ Uganda-schools-portal</b><span>🔍 🔔 👤</span></div>
-<div style="padding:0 14px"><h3>National Student Management Portal</h3><p style="color:#aaa;font-size:11px">Tap any school — all 1041 are ACTIVE</p></div>
-<div class="stats"><div class="st"><b>1041</b><span style="font-size:11px">Total Schools</span></div><div class="st"><b>629</b><span style="font-size:11px">Government</span></div><div class="st"><b>412</b><span style="font-size:11px">Private</span></div></div>
-<div class="search">🔍 <input id="q" placeholder="Search 1041 schools — try Mbarara, Gulu..." oninput="search()"><b id="cnt" style="color:#ff7a00;font-size:11px"></b></div>
+<div class="top"><b>🛡️ Uganda-schools-portal</b><span>🔍 🔔 👤</span></div>
+<div class="h2"><h1>National Student Management Portal</h1><p>All schools in Uganda • Manage • Monitor • Connect</p></div>
+<div class="stats"><div class="st"><b>1041</b><span>Total Schools</span></div><div class="st"><b>629</b><span>Government</span></div><div class="st"><b>412</b><span>Private</span></div></div>
+<div class="searchRow"><div class="sbox">🔍 <input id="q" placeholder="Search school name, district, type..." oninput="applyFilters()"></div><button class="fbtn" onclick="toggleFilters()">▼ Filters</button></div>
+<div class="chips" id="chips">
+<div class="chip active" data-f="all" onclick="setChip(this,'all')">All (1041)</div>
+<div class="chip" data-f="gov" onclick="setChip(this,'gov')">Government</div>
+<div class="chip" data-f="private" onclick="setChip(this,'private')">Private</div>
+<div class="chip" data-f="central" onclick="setChip(this,'central')">Central Region</div>
+<div class="chip" data-f="western" onclick="setChip(this,'western')">Western</div>
+<div class="chip" data-f="eastern" onclick="setChip(this,'eastern')">Eastern</div>
+<div class="chip" data-f="university" onclick="setChip(this,'university')">University</div>
+</div>
+<div class="head2"><h3 id="title">Schools (1041)</h3><span onclick="toggleSort()" id="sortLabel">Sort: Recent ▼</span></div>
 <div id="list"></div>
 
+<div class="bottom">
+<div class="bitem active" onclick="nav(this)"><div>🏠</div>Home</div>
+<div class="bitem" onclick="nav(this)"><div>🏫</div>Schools</div>
+<div class="bitem" onclick="nav(this)"><div>📊</div>Analytics</div>
+<div class="bitem" onclick="nav(this)"><div>💬</div>Messages</div>
+<div class="bitem" onclick="nav(this)"><div>👤</div>Profile</div>
+</div>
+
 <div id="modal" class="modal" onclick="closeM()"><div class="box" onclick="event.stopPropagation()">
-<h2 id="mName" style="color:#d4af37"></h2>
-<p id="mDet" style="color:#aaa;font-size:13px;margin:8px 0"></p>
-<p style="font-size:12px;color:#fff;margin-top:10px">What do you want to do?</p>
+<h2 id="mName" style="color:#ff7a18;font-size:18px"></h2>
+<p id="mDet" style="color:#aaa;font-size:13px;margin:10px 0;white-space:pre-line;line-height:1.5"></p>
 <button class="btn" style="background:#25D366;color:#fff" onclick="whats()">📱 WhatsApp School</button>
-<button class="btn" style="background:#ff7a00;color:#fff" onclick="call()">📞 Call School</button>
-<button class="btn" style="background:#333;color:#fff" onclick="closeM()">Close</button>
+<button class="btn" style="background:#ff7a18;color:#fff" onclick="call()">📞 Call School</button>
+<button class="btn" style="background:#252830;color:#fff" onclick="closeM()">Close</button>
 </div></div>
 
 <script>
-var bases=["Kampala Parents School","Greenhill Academy Kibuli","Kololo SS","Makerere College School","King's College Budo","Gayaza High School","Namilyango College","Seeta High School","Mbarara High School","Ntare School","Busoga College Mwiri","Teso College Aloet","Jinja College","St Mary's Kitende","Mengo SS","St Peters Tororo","Kigezi High School","Gulu High School","Lira Town College","Mbale SS","St Jude Kakooge Primary","Uganda Martyrs Lubaga"];
-var dists=["Kampala","Wakiso","Mukono","Jinja","Mbarara","Gulu","Lira","Mbale","Masaka","Arua","Hoima","Soroti","Kabale","Moroto","Fort Portal","Mityana","Luwero"];
-var all=[],cur=null;
-for(var i=0;i<1041;i++){
- var n=bases[i % bases.length]; if(i>=bases.length) n+=" - "+dists[i % dists.length]+" Campus";
- var gov=i%3!=0; all.push({id:i+1,n:n,d:dists[i % dists.length],t:gov?"Government • Central":"Private • Central",s:200+(i%900),ph:"+256 7"+(10000000+i)});
+var schools=[
+// TOP 3 EXACTLY LIKE YOUR SCREENSHOT
+{id:1,n:"Uganda Martyrs High School Lubaga",loc:"Lubaga, Kampala District • Est. 1968",region:"Central Region • Lubaga",type:"Government",level:"O & A Level",students:1248,cat:"secondary"},
+{id:2,n:"St Jude Kakooge Primary School",loc:"Kakooge, Nakasongola District • Est. 2005",region:"Central Region • Kakooge",type:"Private",level:"Primary (P1-P7)",students:412,cat:"primary"},
+{id:3,n:"Mbarara High School",loc:"Mbarara City • Est. 1960",region:"Western Region • Mbarara",type:"Government",level:"O & A Level",students:980,cat:"secondary"},
+{id:4,n:"Makerere University",loc:"Makerere Hill, Kampala • Est. 1922",region:"Central Region • Kampala",type:"Public University",level:"University • #1 University",students:36000,cat:"university"},
+{id:5,n:"Kyambogo University",loc:"Kyambogo, Kampala",region:"Central Region",type:"Public University",level:"University",students:24000,cat:"university"},
+{id:6,n:"Kololo Senior Secondary School",loc:"Kololo, Kampala District",region:"Central Region",type:"Government",level:"O & A Level",students:1200,cat:"secondary"},
+{id:7,n:"Greenhill Academy Kibuli",loc:"Kibuli, Kampala",region:"Central Region",type:"Private",level:"O & A Level",students:2100,cat:"secondary"},
+{id:8,n:"King's College Budo",loc:"Budo, Wakiso District",region:"Central Region",type:"Government",level:"O & A Level",students:1450,cat:"secondary"}
+];
+var moreNames=["Gayaza High School","Namilyango College","Seeta High School","Ntare School","Busoga College Mwiri","Teso College Aloet","Jinja College","St Mary's College Kisubi","Mengo Senior School","St Peters College Tororo","Kigezi High School","Gulu High School","Lira Town College","Mbale SS","Vienna College Namugongo","Kampala Parents","Kabojja Junior","City Parents","St Joseph's Naggalama","Trinity College Nabbingo","Mt St Mary's Namagunga","Ndejje Senior School","Gulu University","Muni University","Busitema University","Mbarara University (MUST)"];
+var regs=["Central Region","Western Region","Eastern Region","Northern Region"];
+var types=["Government","Private"];
+for(var i=schools.length;i<1041;i++){
+ var name=moreNames[i % moreNames.length]; if(i>=moreNames.length) name+=" "+(Math.floor(i/moreNames.length)+1);
+ var reg=regs[i % regs.length]; var tp=types[i%2]; var cat=i%7==0?"university":(i%3==0?"primary":"secondary");
+ var lvl=cat=="university"?"University":(cat=="primary"?"Primary (P1-P7)":"O & A Level");
+ schools.push({id:i+1,n:name,loc:reg.split(" ")[0]+" City • Est. "+(1960+(i%60)),region:reg+" • "+reg.split(" ")[0],type:tp,level:lvl,students:200+(i%1200),cat:cat});
 }
-function show(arr){
- var h=""; var lim=arr.length>150?150:arr.length;
- for(var i=0;i<lim;i++){ var s=arr[i]; h+="<div class='card' onclick='openM("+s.id+")'><div style='font-size:10px;color:#aaa'><span style='background:#ff7a00;padding:2px 6px;border-radius:4px;color:#fff'>#"+s.id+"</span> "+s.t+"</div><div style='font-weight:700;margin:5px 0;font-size:13px'>"+s.n+"</div><div style='font-size:11px;color:#aaa'>📍 "+s.d+" • 👥 "+s.s+" Students</div><button class='contact' onclick='event.stopPropagation();openM("+s.id+")'>Contact</button><div style='clear:both'></div></div>";}
- if(arr.length>150) h+="<div style='text-align:center;padding:12px;color:#aaa;font-size:12px'>Showing 150 of "+arr.length+" — Search to filter</div>";
- document.getElementById("list").innerHTML=h; document.getElementById("cnt").innerText=arr.length+" found";
+var curFilter="all", curQ="", sortRecent=true, cur=null;
+function render(arr){
+ var h=""; var show=arr.slice(0,200);
+ for(var i=0;i<show.length;i++){
+  var s=show[i];
+  h+="<div class='card' onclick='openM("+s.id+")'><div class='topline'><span class='num'>#"+s.id+"</span> "+s.type+" • "+s.region+"</div><div class='name'>"+s.n+"</div><div class='loc'>📍 "+s.loc+"</div><div class='metas'><div class='meta'>👥 Students: "+s.students+"</div><div class='meta'>🎓 "+s.level+"</div></div><button class='contact' onclick='event.stopPropagation();openM("+s.id+")'>Contact</button><div style='clear:both'></div></div>";
+ }
+ if(arr.length>200) h+="<div style='text-align:center;color:#6b7280;padding:12px;font-size:12px'>Showing 200 of "+arr.length+" — use search/filters to narrow</div>";
+ document.getElementById("list").innerHTML=h;
+ document.getElementById("title").innerText="Schools ("+arr.length+")";
 }
-function openM(id){ cur=all.find(function(x){return x.id===id}); document.getElementById("mName").innerText=cur.n; document.getElementById("mDet").innerText="📍 "+cur.d+", Uganda\n"+cur.t+"\n👥 "+cur.s+" Students\n🆔 School #"+cur.id+"\n📞 "+cur.ph+"\n\nThis school is ACTIVE — you can call or WhatsApp!"; document.getElementById("modal").style.display="flex"; }
+function applyFilters(){
+ curQ=document.getElementById("q").value.toLowerCase();
+ var f=schools.filter(function(s){
+  var matchQ=!curQ || s.n.toLowerCase().includes(curQ) || s.region.toLowerCase().includes(curQ) || s.type.toLowerCase().includes(curQ) || s.level.toLowerCase().includes(curQ);
+  var matchF=true;
+  if(curFilter=="gov") matchF=s.type.includes("Government")||s.type.includes("Public");
+  else if(curFilter=="private") matchF=s.type.includes("Private");
+  else if(curFilter=="central") matchF=s.region.includes("Central");
+  else if(curFilter=="western") matchF=s.region.includes("Western");
+  else if(curFilter=="eastern") matchF=s.region.includes("Eastern");
+  else if(curFilter=="university") matchF=s.cat=="university";
+  return matchQ && matchF;
+ });
+ if(sortRecent) f=f.sort(function(a,b){return a.id-b.id});
+ else f=f.sort(function(a,b){return a.n.localeCompare(b.n)});
+ render(f);
+}
+function setChip(el,type){
+ document.querySelectorAll('.chip').forEach(function(c){c.classList.remove('active')}); el.classList.add('active'); curFilter=type; applyFilters();
+}
+function toggleSort(){ sortRecent=!sortRecent; document.getElementById("sortLabel").innerText=sortRecent?"Sort: Recent ▼":"Sort: A-Z ▼"; applyFilters(); }
+function toggleFilters(){ document.getElementById("chips").scrollIntoView({behavior:'smooth'}); }
+function openM(id){ var s=schools.find(function(x){return x.id===id}); cur=s; document.getElementById("mName").innerText=s.n; document.getElementById("mDet").innerText="📍 "+s.loc+"\n"+s.type+" • "+s.region+"\n🎓 "+s.level+"\n👥 Students: "+s.students+"\n🆔 #"+s.id+"\n\nThis school is ACTIVE — you can contact directly!"; document.getElementById("modal").style.display="flex"; }
 function closeM(){ document.getElementById("modal").style.display="none"; }
-function whats(){ var txt=encodeURIComponent("Hello "+cur.n+", I found you on Uganda School Portal v2.1 — I want to inquire about admission."); window.open("https://wa.me/"+cur.ph.replace(/[^0-9]/g,"")+"?text="+txt,"_blank"); }
-function call(){ window.open("tel:"+cur.ph,"_self"); }
-function search(){ var v=document.getElementById("q").value.toLowerCase(); if(!v){show(all);return;} var f=all.filter(function(x){return x.n.toLowerCase().indexOf(v)>-1 || x.d.toLowerCase().indexOf(v)>-1}); show(f); }
-show(all);
+function whats(){ var txt=encodeURIComponent("Hello "+cur.n+", I found you on Uganda School Portal v2.1 — inquiry about admission. ID #"+cur.id); window.open("https://wa.me/256700000000?text="+txt,"_blank"); }
+function call(){ window.open("tel:+256700000000","_self"); }
+function nav(el){ document.querySelectorAll('.bitem').forEach(function(b){b.classList.remove('active')}); el.classList.add('active'); if(el.innerText.includes("Analytics")){ var g=schools.filter(function(s){return s.type.includes("Government")}).length; alert("Analytics:\nTotal: 1041\nGovernment: "+g+"\nPrivate: "+(1041-g)+"\nCentral: "+schools.filter(function(s){return s.region.includes("Central")}).length); } }
+render(schools);
+if(document.querySelector('.logoBar img').complete && document.querySelector('.logoBar img').naturalWidth==0){ document.getElementById('logoText').style.display='block'; }
 </script>
 </body></html>
