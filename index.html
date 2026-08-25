@@ -1,0 +1,13 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Uganda School Portal v2.1</title>
+<style>*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}body{background:#eef6f5}
+.top{background:#000;padding:28px;text-align:center}.top h1{color:#d4af37;font-size:22px}.top h2{color:#d4af37;font-size:13px;font-weight:400}.card{background:#fff;margin:10px;border-radius:14px;padding:12px}.school{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee}.b{padding:3px 7px;border-radius:6px;color:#fff;font-size:10px;font-weight:700}.b1{background:#ff7a00}.b2{background:#2a5bd7}.b3{background:#6a0dad}.btn{border:0;padding:5px 12px;border-radius:12px;color:#fff;font-size:11px}</style></head><body>
+<div class="top"><div style="font-size:46px">📚</div><h1>UGANDA SCHOOL</h1><h2>School Portal • v2.1 • Kampala, Uganda</h2><div style="color:#fff;margin-top:8px">🇺🇬 Kampala, Uganda</div></div>
+<div class="card"><b>🏠 Primary Schools</b><div id="p"></div></div>
+<div class="card"><b>🎓 Secondary Schools</b><div id="s"></div></div>
+<div class="card"><b>🏛️ Universities</b><div id="u"></div></div>
+<div class="card"><b>🌟 All Uganda Schools</b><div id="a"></div></div>
+<script>
+let P=["Kampala Parents","Greenhill Kibuli","Kabojja Junior","St Jude Primary"],S=["Kololo SS","Makerere College","Seeta High","Budo","Gayaza","Namilyango"],U=["Makerere University","Kyambogo","Mbarara University"],A=["Mbarara High","Jinja College","Gulu High","Lira College"];
+function R(id,list,tag,cls){let h="";list.forEach(n=>{h+=`<div class="school"><div><span class="b ${cls}">${tag}</span> <b> ${n}</b></div><button class="btn ${cls}">Select</button></div>`});document.getElementById(id).innerHTML=h}
+R("p",P,"Primary","b1");R("s",S,"Secondary","b2");R("u",U,"University","b3");R("a",A,"All","b1");
+</script></body></html>
