@@ -1,112 +1,83 @@
 <!doctype html>
-<html><head><meta charset="utf-8">
+<html>
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Uganda Schools Portal - Real Schools</title>
+<title>Uganda Schools Portal</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#0f0f0f;color:#fff}
-header{background:#ff6a00;padding:12px 15px;position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between}
-header h1{margin:0;font-size:16px}
-.search{padding:10px;background:#1a1a1a;position:sticky;top:44px;z-index:9}
+body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff;text-align:center}
+.top{background:linear-gradient(135deg,#ff6a00,#ff9500);padding:20px}
+.logo{width:90px;height:90px;border-radius:50%;background:#fff;padding:3px;margin:0 auto;display:block}
+.search{padding:10px;background:#1a1a1a;position:sticky;top:0}
 .search input{width:100%;padding:12px;border-radius:8px;border:1px solid #333;background:#222;color:#fff}
-.filters{display:flex;gap:6px;overflow:auto;padding:8px 10px;background:#1a1a1a}
-.filters button{white-space:nowrap;padding:6px 12px;border-radius:20px;border:1px solid #444;background:#222;color:#ccc}
-.filters button.active{background:#ff6a00;color:#fff;border-color:#ff6a00}
-.school{background:#1e1e1e;margin:8px 10px;padding:12px;border-radius:10px;border-left:4px solid #ff6a00;display:flex;justify-content:space-between;align-items:center}
+.filters{display:flex;gap:6px;overflow:auto;padding:8px;background:#1a1a1a}
+.filters button{padding:6px 12px;border-radius:20px;border:1px solid #444;background:#222;color:#ccc}
+.filters button.active{background:#ff6a00;color:#fff}
+.school{background:#1e1e1e;margin:8px;padding:12px;border-radius:10px;border-left:4px solid #ff6a00;text-align:left}
 .school b{color:#ffcc00}
-.school small{color:#aaa;display:block;margin-top:3px}
-.contact{background:#ffcc00;color:#000;border:none;padding:7px 12px;border-radius:20px;font-weight:bold}
-.count{text-align:center;padding:8px;color:#888;font-size:12px}
-</style></head><body>
-<header><h1>🇺🇬 Uganda-schools-portal</h1><span id="total"></span></header>
-<div class="search"><input id="q" placeholder="Search real schools: e.g Gayaza, Budo, Kibuli..."></div>
+.school small{color:#aaa;display:block}
+</style>
+</head>
+<body>
+
+<div class="top">
+<img src="logo.png" class="logo">
+<h1>Uganda Schools Portal</h1>
+<p>Real Schools - P1-P7 - S1-S6 - University</p>
+<small id="total"></small>
+</div>
+
+<div class="search">
+<input id="q" placeholder="Search Makerere, Gayaza...">
+</div>
+
 <div class="filters">
 <button class="active" onclick="filter('all',this)">All</button>
-<button onclick="filter('Central',this)">Central</button>
-<button onclick="filter('Eastern',this)">Eastern</button>
-<button onclick="filter('Western',this)">Western</button>
-<button onclick="filter('Northern',this)">Northern</button>
-<button onclick="filter('Secondary',this)">Secondary</button>
-<button onclick="filter('Primary',this)">Primary</button>
+<button onclick="filter('University',this)">Universities</button>
+<button onclick="filter('Secondary',this)">S1-S6</button>
+<button onclick="filter('Primary',this)">P1-P7</button>
 </div>
+
 <div id="list"></div>
-<div class="count" id="count"></div>
 
 <script>
-const schools=[
-["Gayaza High School","Wakiso","Central","Secondary","Private"],
-["King's College Budo","Wakiso","Central","Secondary","Private"],
-["Mt St Mary's Namagunga","Mukono","Central","Secondary","Private"],
-["St Mary's Kisubi - SMACK","Wakiso","Central","Secondary","Private"],
-["Kibuli Secondary School","Kampala","Central","Secondary","Government"],
-["Namilyango College","Mukono","Central","Secondary","Government"],
-["Trinity College Nabbingo","Wakiso","Central","Secondary","Private"],
-["Seeta High School","Mukono","Central","Secondary","Private"],
-["Mengo Senior School","Kampala","Central","Secondary","Government"],
-["Buddo SS","Wakiso","Central","Secondary","Private"],
-["St Henry's College Kitovu","Masaka","Central","Secondary","Private"],
-["Kawempe Muslim SS","Kampala","Central","Secondary","Private"],
-["Makerere College School","Kampala","Central","Secondary","Government"],
-["Uganda Martyrs Namugongo","Wakiso","Central","Secondary","Private"],
-["St Mary's Kitende","Wakiso","Central","Secondary","Private"],
-["Kampala Parents School","Kampala","Central","Primary","Private"],
-["City Parents School","Kampala","Central","Primary","Private"],
-["Lohana Academy","Kampala","Central","Primary","Private"],
-["Jinja College","Jinja","Eastern","Secondary","Government"],
-["Jinja SS","Jinja","Eastern","Secondary","Government"],
-["Busoga College Mwiri","Jinja","Eastern","Secondary","Government"],
-["Iganga SS","Iganga","Eastern","Secondary","Government"],
-["Tororo Girls School","Tororo","Eastern","Secondary","Government"],
-["Manjasi High Tororo","Tororo","Eastern","Secondary","Private"],
-["Mbale SS","Mbale","Eastern","Secondary","Government"],
-["Nabumali High","Mbale","Eastern","Secondary","Private"],
-["Teso College Aloet","Soroti","Eastern","Secondary","Government"],
-["St Peter's College Tororo","Tororo","Eastern","Secondary","Private"],
-["Ntare School","Mbarara","Western","Secondary","Government"],
-["Mbarara High School","Mbarara","Western","Secondary","Government"],
-["Maryhill High Mbarara","Mbarara","Western","Secondary","Government"],
-["Bweranyangi Girls","Bushenyi","Western","Secondary","Government"],
-["Ntungamo High","Ntungamo","Western","Secondary","Private"],
-["Kigezi College Butobere","Kabale","Western","Secondary","Government"],
-["Kigezi High","Kabale","Western","Secondary","Private"],
-["St Leo's College Kyegobe","Fort Portal","Western","Secondary","Government"],
-["Kyebambe Girls","Fort Portal","Western","Secondary","Government"],
-["Gulu High School","Gulu","Northern","Secondary","Government"],
-["Sacred Heart Gulu","Gulu","Northern","Secondary","Private"],
-["Lira Town College","Lira","Northern","Secondary","Private"],
-["Dr Obote College Boroboro","Lira","Northern","Secondary","Government"],
-["St Joseph's College Layibi","Gulu","Northern","Secondary","Government"],
-["Mvara SS Arua","Arua","Northern","Secondary","Government"],
-["Muni Girls Arua","Arua","Northern","Secondary","Private"],
-["Lango College","Lira","Northern","Secondary","Government"],
-["Arua Primary","Arua","Northern","Primary","Government"],
-["Buganda Road Primary","Kampala","Central","Primary","Government"],
-["Nakasero Primary","Kampala","Central","Primary","Government"],
-["Kitante Primary","Kampala","Central","Primary","Government"],
-["Aga Khan Primary","Kampala","Central","Primary","Private"]
+const schools = [
+ ["Makerere University","Kampala","University"],
+ ["Kyambogo University","Kampala","University"],
+ ["MUST Mbarara","Mbarara","University"],
+ ["Gulu University","Gulu","University"],
+ ["Busitema University","Tororo","University"],
+ ["UCU Mukono","Mukono","University"],
+ ["KIU","Kampala","University"],
+ ["Gayaza High School","Wakiso","Secondary S1-S6"],
+ ["King's College Budo","Wakiso","Secondary S1-S6"],
+ ["Namagunga","Mukono","Secondary S1-S6"],
+ ["Namilyango College","Mukono","Secondary S1-S6"],
+ ["Kibuli SS","Kampala","Secondary S1-S6"],
+ ["Ntare School","Mbarara","Secondary S1-S6"],
+ ["Jinja College","Jinja","Secondary S1-S6"],
+ ["Gulu High","Gulu","Secondary S1-S6"],
+ ["Kampala Parents","Kampala","Primary P1-P7"],
+ ["Buganda Road Primary","Kampala","Primary P1-P7"],
+ ["City Parents School","Kampala","Primary P1-P7"]
 ];
+
 let cur='all';
 function render(){
-let q=document.getElementById('q').value.toLowerCase();
-let f=schools.filter(s=>{
-let matchRegion=cur==='all' || s[2].includes(cur) || s[3].includes(cur);
-let matchSearch=s.join(' ').toLowerCase().includes(q);
-return matchRegion && matchSearch;
-});
-document.getElementById('list').innerHTML=f.map((s,i)=>`
-<div class="school">
-<div><b>${s[0]}</b><small>${s[4]} • ${s[2]} Region • ${s[3]} (P1-P7 / S1-S6) • ${s[1]} District</small></div>
-<button class="contact" onclick="alert('Contact ${s[0]} - ${s[1]}')">Contact</button>
-</div>`).join('');
-document.getElementById('count').innerText=`Showing ${f.length} real schools • Total in database: ${schools.length}`;
-document.getElementById('total').innerText=f.length+' schools';
+ let q=document.getElementById('q').value.toLowerCase();
+ let f=schools.filter(s=>(cur=='all'||s[2].includes(cur))&&s.join(' ').toLowerCase().includes(q));
+ document.getElementById('list').innerHTML=f.map(s=>`<div class="school"><b>${s[0]}</b><small>${s[2]} - ${s[1]}</small></div>`).join('');
+ document.getElementById('total').innerText=f.length+' schools';
 }
-function filter(t,btn){
-cur=t;
-document.querySelectorAll('.filters button').forEach(b=>b.classList.remove('active'));
-btn.classList.add('active');
-render();
+function filter(t,b){
+ cur=t;
+ document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));
+ b.classList.add('active');
+ render();
 }
 document.getElementById('q').addEventListener('input',render);
 render();
 </script>
-</body></html>
+
+</body>
+</html>
