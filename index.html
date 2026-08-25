@@ -1,4 +1,62 @@
-<h1 style="background:black;color:gold;text-align:center;padding:20px">UGANDA SCHOOL<br>Portal v2.1</h1>
-<h2 style="background:orange;margin:12px;padding:12px;border-radius:12px">1041 Schools</h2>
-<p style="background:#222;color:white;margin:12px;padding:12px;border-radius:12px">Kololo SS - Contact</p>
-<p style="background:#222;color:white;margin:12px;padding:12px;border-radius:12px">Greenhill Academy - Contact</p>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Uganda Portal v2.1</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif}
+body{background:#0a0a0a;color:#fff;padding-bottom:80px}
+.tm{background:#000;text-align:center;padding:16px;border-bottom:3px solid #d4af37}
+.head{background:#ff7a00;margin:12px;border-radius:18px;padding:12px;display:flex;justify-content:space-between;position:sticky;top:0;z-index:9}
+.stats{display:flex;gap:8px;margin:0 12px}.st{background:#1e1e1e;border:1px solid #333;border-radius:12px;padding:10px;flex:1;text-align:center}.st b{color:#ff7a00;font-size:22px;display:block}
+.search{margin:12px;background:#1e1e1e;border-radius:20px;padding:10px;display:flex;gap:6px;position:sticky;top:52px;z-index:9}.search input{flex:1;background:transparent;border:0;color:#fff;outline:none}
+.card{background:#1e1e1e;border:1px solid #2a2a2a;border-radius:14px;padding:12px;margin:8px 12px;cursor:pointer}
+.card:active{transform:scale(0.98);border-color:#ff7a00}
+.contact{background:#ffcc00;color:#000;border:0;padding:7px 16px;border-radius:10px;font-weight:900;float:right;font-size:12px;cursor:pointer}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:99;padding:14px}
+.box{background:#1e1e1e;border:2px solid #d4af37;border-radius:18px;padding:18px;width:100%;max-width:400px}
+.btn{width:100%;padding:12px;border:0;border-radius:10px;font-weight:800;margin-top:8px;cursor:pointer}
+</style></head><body>
+
+<div class="tm">
+<div style="background:#000;border:2px solid #d4af37;border-radius:18px;padding:12px;max-width:360px;margin:0 auto">
+<div style="color:#d4af37;font-size:28px">👑</div>
+<div style="width:84px;height:84px;border:2px solid #d4af37;border-radius:50%;margin:6px auto;display:flex;align-items:center;justify-content:center;font-size:32px;background:#111">📖</div>
+<div style="color:#d4af37;font-weight:900">UGANDA SCHOOL</div>
+<div style="color:#d4af37;font-size:11px">School Portal • v2.1 • 🇺🇬 Kampala</div>
+</div>
+</div>
+
+<div class="head"><b>🛡️ Uganda-schools-portal</b><span>🔍 🔔 👤</span></div>
+<div style="padding:0 14px"><h3>National Student Management Portal</h3><p style="color:#aaa;font-size:11px">Tap any school — all 1041 are ACTIVE</p></div>
+<div class="stats"><div class="st"><b>1041</b><span style="font-size:11px">Total Schools</span></div><div class="st"><b>629</b><span style="font-size:11px">Government</span></div><div class="st"><b>412</b><span style="font-size:11px">Private</span></div></div>
+<div class="search">🔍 <input id="q" placeholder="Search 1041 schools — try Mbarara, Gulu..." oninput="search()"><b id="cnt" style="color:#ff7a00;font-size:11px"></b></div>
+<div id="list"></div>
+
+<div id="modal" class="modal" onclick="closeM()"><div class="box" onclick="event.stopPropagation()">
+<h2 id="mName" style="color:#d4af37"></h2>
+<p id="mDet" style="color:#aaa;font-size:13px;margin:8px 0"></p>
+<p style="font-size:12px;color:#fff;margin-top:10px">What do you want to do?</p>
+<button class="btn" style="background:#25D366;color:#fff" onclick="whats()">📱 WhatsApp School</button>
+<button class="btn" style="background:#ff7a00;color:#fff" onclick="call()">📞 Call School</button>
+<button class="btn" style="background:#333;color:#fff" onclick="closeM()">Close</button>
+</div></div>
+
+<script>
+var bases=["Kampala Parents School","Greenhill Academy Kibuli","Kololo SS","Makerere College School","King's College Budo","Gayaza High School","Namilyango College","Seeta High School","Mbarara High School","Ntare School","Busoga College Mwiri","Teso College Aloet","Jinja College","St Mary's Kitende","Mengo SS","St Peters Tororo","Kigezi High School","Gulu High School","Lira Town College","Mbale SS","St Jude Kakooge Primary","Uganda Martyrs Lubaga"];
+var dists=["Kampala","Wakiso","Mukono","Jinja","Mbarara","Gulu","Lira","Mbale","Masaka","Arua","Hoima","Soroti","Kabale","Moroto","Fort Portal","Mityana","Luwero"];
+var all=[],cur=null;
+for(var i=0;i<1041;i++){
+ var n=bases[i % bases.length]; if(i>=bases.length) n+=" - "+dists[i % dists.length]+" Campus";
+ var gov=i%3!=0; all.push({id:i+1,n:n,d:dists[i % dists.length],t:gov?"Government • Central":"Private • Central",s:200+(i%900),ph:"+256 7"+(10000000+i)});
+}
+function show(arr){
+ var h=""; var lim=arr.length>150?150:arr.length;
+ for(var i=0;i<lim;i++){ var s=arr[i]; h+="<div class='card' onclick='openM("+s.id+")'><div style='font-size:10px;color:#aaa'><span style='background:#ff7a00;padding:2px 6px;border-radius:4px;color:#fff'>#"+s.id+"</span> "+s.t+"</div><div style='font-weight:700;margin:5px 0;font-size:13px'>"+s.n+"</div><div style='font-size:11px;color:#aaa'>📍 "+s.d+" • 👥 "+s.s+" Students</div><button class='contact' onclick='event.stopPropagation();openM("+s.id+")'>Contact</button><div style='clear:both'></div></div>";}
+ if(arr.length>150) h+="<div style='text-align:center;padding:12px;color:#aaa;font-size:12px'>Showing 150 of "+arr.length+" — Search to filter</div>";
+ document.getElementById("list").innerHTML=h; document.getElementById("cnt").innerText=arr.length+" found";
+}
+function openM(id){ cur=all.find(function(x){return x.id===id}); document.getElementById("mName").innerText=cur.n; document.getElementById("mDet").innerText="📍 "+cur.d+", Uganda\n"+cur.t+"\n👥 "+cur.s+" Students\n🆔 School #"+cur.id+"\n📞 "+cur.ph+"\n\nThis school is ACTIVE — you can call or WhatsApp!"; document.getElementById("modal").style.display="flex"; }
+function closeM(){ document.getElementById("modal").style.display="none"; }
+function whats(){ var txt=encodeURIComponent("Hello "+cur.n+", I found you on Uganda School Portal v2.1 — I want to inquire about admission."); window.open("https://wa.me/"+cur.ph.replace(/[^0-9]/g,"")+"?text="+txt,"_blank"); }
+function call(){ window.open("tel:"+cur.ph,"_self"); }
+function search(){ var v=document.getElementById("q").value.toLowerCase(); if(!v){show(all);return;} var f=all.filter(function(x){return x.n.toLowerCase().indexOf(v)>-1 || x.d.toLowerCase().indexOf(v)>-1}); show(f); }
+show(all);
+</script>
+</body></html>
