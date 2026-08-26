@@ -1,82 +1,1051 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Uganda Schools Portal</title>
+
 <style>
-body{margin:0;font-family:Arial;background:#0f0f0f;color:#fff;text-align:center}
-.top{background:linear-gradient(135deg,#ff6a00,#ff9500);padding:20px}
-.logo{width:90px;height:90px;border-radius:50%;background:#fff;padding:3px;margin:0 auto;display:block}
-.search{padding:10px;background:#1a1a1a;position:sticky;top:0}
-.search input{width:100%;padding:12px;border-radius:8px;border:1px solid #333;background:#222;color:#fff}
-.filters{display:flex;gap:6px;overflow:auto;padding:8px;background:#1a1a1a}
-.filters button{padding:6px 12px;border-radius:20px;border:1px solid #444;background:#222;color:#ccc}
-.filters button.active{background:#ff6a00;color:#fff}
-.school{background:#1e1e1e;margin:8px;padding:12px;border-radius:10px;border-left:4px solid #ff6a00;text-align:left}
-.school b{color:#ffcc00}
-.school small{color:#aaa;display:block}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f7fb;
+color:#17233c;
+}
+
+header{
+background:#08265c;
+color:white;
+padding:25px 15px;
+text-align:center;
+}
+
+header h1{
+font-size:25px;
+}
+
+header p{
+margin-top:7px;
+opacity:.9;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:white;
+border-radius:16px;
+padding:20px;
+margin-bottom:16px;
+box-shadow:0 4px 15px rgba(0,0,0,.07);
+}
+
+h2{
+margin-bottom:8px;
+}
+
+h3{
+color:#08265c;
+margin-bottom:12px;
+}
+
+.muted{
+color:#667085;
+font-size:14px;
+line-height:1.5;
+}
+
+button{
+border:0;
+border-radius:9px;
+padding:13px 18px;
+background:#08265c;
+color:white;
+cursor:pointer;
+margin-top:10px;
+}
+
+button.secondary{
+background:#e9eef8;
+color:#08265c;
+}
+
+input,
+select{
+width:100%;
+padding:13px;
+border:1px solid #ccd4e0;
+border-radius:9px;
+margin:7px 0 12px;
+}
+
+.school{
+border:1px solid #dde3ee;
+border-radius:12px;
+padding:16px;
+margin-top:10px;
+}
+
+.hidden{
+display:none;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.stat{
+background:#f5f7fb;
+padding:15px;
+border-radius:12px;
+}
+
+.stat strong{
+display:block;
+font-size:19px;
+margin-top:5px;
+}
+
+.badge{
+display:inline-block;
+background:#e8f7ed;
+color:#18753c;
+padding:6px 10px;
+border-radius:20px;
+font-size:12px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th,
+td{
+padding:10px;
+border-bottom:1px solid #eee;
+text-align:left;
+font-size:13px;
+}
+
+.good{
+color:#18753c;
+font-weight:bold;
+}
+
+.warning{
+color:#b56b00;
+font-weight:bold;
+}
+
+.announcement{
+border-left:4px solid #08265c;
+padding:12px;
+background:#f7f9fc;
+margin-bottom:10px;
+}
+
+footer{
+text-align:center;
+padding:25px;
+font-size:12px;
+color:#667085;
+}
+
+@media(max-width:600px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+}
+
 </style>
+
 </head>
+
 <body>
 
-<div class="top">
-<img src="logo.png" class="logo">
-<h1>Uganda Schools Portal</h1>
-<p>Real Schools - P1-P7 - S1-S6 - University</p>
-<small id="total"></small>
+<header>
+
+<h1>🇺🇬 Uganda Schools Portal</h1>
+
+<p>
+One platform for schools, staff, students and parents
+</p>
+
+</header>
+
+<div class="container">
+
+<!-- SCHOOL DIRECTORY -->
+
+<section id="home">
+
+<div class="card">
+
+<h2>Find Your School</h2>
+
+<p class="muted">
+
+Search for a school and open its portal.
+
+</p>
+
+<input
+id="schoolSearch"
+placeholder="Search school name..."
+oninput="searchSchools()"
+>
+
 </div>
 
-<div class="search">
-<input id="q" placeholder="Search Makerere, Gayaza...">
+<div id="schools">
+
+<div class="card school">
+
+<h3>St Jude Kakooge Primary School</h3>
+
+<p class="muted">
+Primary School • Uganda
+</p>
+
+<button
+onclick="openSchool('St Jude Kakooge Primary School')"
+>
+Open School
+</button>
+
 </div>
 
-<div class="filters">
-<button class="active" onclick="filter('all',this)">All</button>
-<button onclick="filter('University',this)">Universities</button>
-<button onclick="filter('Secondary',this)">S1-S6</button>
-<button onclick="filter('Primary',this)">P1-P7</button>
+<div class="card school">
+
+<h3>Uganda Martyrs High School Lubaga</h3>
+
+<p class="muted">
+Secondary School • Uganda
+</p>
+
+<button
+onclick="openSchool('Uganda Martyrs High School Lubaga')"
+>
+Open School
+</button>
+
 </div>
 
-<div id="list"></div>
+<div class="card school">
+
+<h3>Makerere University</h3>
+
+<p class="muted">
+University • Uganda
+</p>
+
+<button
+onclick="openSchool('Makerere University')"
+>
+Open Institution
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SCHOOL PROFILE -->
+
+<section
+id="schoolProfile"
+class="hidden"
+>
+
+<div class="card">
+
+<h2 id="schoolName">
+School
+</h2>
+
+<p class="muted">
+
+🏫 School Profile
+
+</p>
+
+<div class="grid">
+
+<div class="stat">
+School Level
+<strong id="schoolLevel">
+Secondary
+</strong>
+</div>
+
+<div class="stat">
+District
+<strong>
+Kampala
+</strong>
+</div>
+
+<div class="stat">
+Status
+<strong class="good">
+ACTIVE
+</strong>
+</div>
+
+<div class="stat">
+EMIS Number
+<strong>
+Pending connection
+</strong>
+</div>
+
+</div>
+
+<br>
+
+<p class="muted">
+
+<strong>Motto:</strong>
+School motto will appear here after the school's official profile is connected.
+
+</p>
+
+<br>
+
+<p class="muted">
+
+<strong>Location:</strong>
+School location will appear here.
+
+</p>
+
+<button
+onclick="showLogin()"
+>
+Login to School Portal
+</button>
+
+<button
+class="secondary"
+onclick="showHome()"
+>
+Back
+</button>
+
+</div>
+
+</section>
+
+
+<!-- LOGIN -->
+
+<section
+id="login"
+class="hidden"
+>
+
+<div class="card">
+
+<h2>🔐 School Portal Login</h2>
+
+<p
+class="muted"
+id="loginSchool"
+>
+</p>
+
+<label>
+Account type
+</label>
+
+<select id="role">
+
+<option value="parent">
+Parent
+</option>
+
+<option value="head">
+Head Teacher / Headmaster
+</option>
+
+<option value="deputy">
+Deputy Head Teacher
+</option>
+
+<option value="dos">
+Director of Studies
+</option>
+
+<option value="bursar">
+Bursar / Finance
+</option>
+
+<option value="teacher">
+Class Teacher
+</option>
+
+<option value="board">
+School Governing Board
+</option>
+
+</select>
+
+<label>
+Username / Phone
+</label>
+
+<input
+placeholder="Enter account"
+>
+
+<label>
+Password
+</label>
+
+<input
+type="password"
+placeholder="Enter password"
+>
+
+<button
+onclick="login()"
+>
+Login
+</button>
+
+<button
+class="secondary"
+onclick="backToSchool()"
+>
+Back
+</button>
+
+<p class="muted">
+
+Demo mode for now. Real secure authentication will be added later.
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- PARENT PORTAL -->
+
+<section
+id="parent"
+class="hidden"
+>
+
+<div class="card">
+
+<h2>
+👨‍👩‍👧 Parent Portal
+</h2>
+
+<p
+class="muted"
+id="parentSchool"
+>
+</p>
+
+<button
+class="secondary"
+onclick="showHome()"
+>
+Logout
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+👨‍🎓 Student Profile
+</h3>
+
+<div class="grid">
+
+<div class="stat">
+Profile Picture
+<strong>
+👤
+</strong>
+</div>
+
+<div class="stat">
+Admission Number
+<strong>
+UMHL001
+</strong>
+</div>
+
+<div class="stat">
+Student Name
+<strong>
+Nakato Brian
+</strong>
+</div>
+
+<div class="stat">
+Gender
+<strong>
+Male
+</strong>
+</div>
+
+<div class="stat">
+Class
+<strong>
+S.2 A
+</strong>
+</div>
+
+<div class="stat">
+Parent / Guardian
+<strong>
+Demo Parent
+</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+📊 Student Performance
+</h3>
+
+<span class="badge">
+↗ IMPROVED
+</span>
+
+<table>
+
+<tr>
+
+<th>
+Subject
+</th>
+
+<th>
+Score
+</th>
+
+<th>
+Average
+</th>
+
+<th>
+Position
+</th>
+
+</tr>
+
+<tr>
+
+<td>
+Mathematics
+</td>
+
+<td>
+82%
+</td>
+
+<td>
+71%
+</td>
+
+<td>
+8th
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+English
+</td>
+
+<td>
+78%
+</td>
+
+<td>
+69%
+</td>
+
+<td>
+10th
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+Science
+</td>
+
+<td>
+86%
+</td>
+
+<td>
+73%
+</td>
+
+<td>
+6th
+</td>
+
+</tr>
+
+</table>
+
+<br>
+
+<p class="muted">
+
+Beginning of term:
+68%
+
+<br>
+
+Mid term:
+74%
+
+<br>
+
+End of term:
+82%
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+💰 School Fees
+</h3>
+
+<div class="grid">
+
+<div class="stat">
+Required
+<strong>
+UGX 800,000
+</strong>
+</div>
+
+<div class="stat">
+Paid
+<strong>
+UGX 600,000
+</strong>
+</div>
+
+<div class="stat">
+Balance
+<strong class="warning">
+UGX 200,000
+</strong>
+</div>
+
+<div class="stat">
+Due Date
+<strong>
+15/09/2026
+</strong>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+🕐 Attendance
+</h3>
+
+<p>
+
+Present:
+<strong>
+54
+</strong>
+
+</p>
+
+<p>
+
+Absent:
+<strong>
+3
+</strong>
+
+</p>
+
+<p>
+
+Late:
+<strong>
+2
+</strong>
+
+</p>
+
+<p>
+
+Attendance:
+<strong class="good">
+91%
+</strong>
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+💬 Teacher Comment
+</h3>
+
+<p class="muted">
+
+The student has shown good improvement this term.
+
+Continue working hard and participating actively in class.
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+📢 School Announcements
+</h3>
+
+<div class="announcement">
+
+<strong>
+Parents' Meeting
+</strong>
+
+<p class="muted">
+
+Parents' meeting will be held on Friday.
+
+</p>
+
+</div>
+
+<div class="announcement">
+
+<strong>
+End of Term Examination
+</strong>
+
+<p class="muted">
+
+Examinations begin on 20 September.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+📅 School Calendar
+</h3>
+
+<p class="muted">
+
+School events and official dates will appear here.
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- STAFF PORTAL -->
+
+<section
+id="staff"
+class="hidden"
+>
+
+<div class="card">
+
+<h2
+id="staffTitle"
+>
+School Management
+</h2>
+
+<p
+class="muted"
+id="staffSchool"
+>
+</p>
+
+<button
+class="secondary"
+onclick="showHome()"
+>
+Logout
+</button>
+
+</div>
+
+<div
+id="staffModules"
+class="card"
+>
+</div>
+
+</section>
+
+</div>
+
+
+<footer>
+
+Uganda Schools Portal © 2026
+
+</footer>
+
 
 <script>
-const schools = [
- ["Makerere University","Kampala","University"],
- ["Kyambogo University","Kampala","University"],
- ["MUST Mbarara","Mbarara","University"],
- ["Gulu University","Gulu","University"],
- ["Busitema University","Tororo","University"],
- ["UCU Mukono","Mukono","University"],
- ["KIU","Kampala","University"],
- ["Gayaza High School","Wakiso","Secondary S1-S6"],
- ["King's College Budo","Wakiso","Secondary S1-S6"],
- ["Namagunga","Mukono","Secondary S1-S6"],
- ["Namilyango College","Mukono","Secondary S1-S6"],
- ["Kibuli SS","Kampala","Secondary S1-S6"],
- ["Ntare School","Mbarara","Secondary S1-S6"],
- ["Jinja College","Jinja","Secondary S1-S6"],
- ["Gulu High","Gulu","Secondary S1-S6"],
- ["Kampala Parents","Kampala","Primary P1-P7"],
- ["Buganda Road Primary","Kampala","Primary P1-P7"],
- ["City Parents School","Kampala","Primary P1-P7"]
-];
 
-let cur='all';
-function render(){
- let q=document.getElementById('q').value.toLowerCase();
- let f=schools.filter(s=>(cur=='all'||s[2].includes(cur))&&s.join(' ').toLowerCase().includes(q));
- document.getElementById('list').innerHTML=f.map(s=>`<div class="school"><b>${s[0]}</b><small>${s[2]} - ${s[1]}</small></div>`).join('');
- document.getElementById('total').innerText=f.length+' schools';
+let selectedSchool="";
+
+function hideAll(){
+
+document
+.querySelectorAll("section")
+.forEach(
+section =>
+section.classList.add("hidden")
+);
+
 }
-function filter(t,b){
- cur=t;
- document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('active'));
- b.classList.add('active');
- render();
+
+function showHome(){
+
+hideAll();
+
+document
+.getElementById("home")
+.classList.remove("hidden");
+
+window.scrollTo(0,0);
+
 }
-document.getElementById('q').addEventListener('input',render);
-render();
+
+function openSchool(name){
+
+selectedSchool=name;
+
+document
+.getElementById("schoolName")
+.innerText=name;
+
+document
+.getElementById("loginSchool")
+.innerText=name;
+
+hideAll();
+
+document
+.getElementById("schoolProfile")
+.classList.remove("hidden");
+
+}
+
+function showLogin(){
+
+hideAll();
+
+document
+.getElementById("login")
+.classList.remove("hidden");
+
+}
+
+function backToSchool(){
+
+hideAll();
+
+document
+.getElementById("schoolProfile")
+.classList.remove("hidden");
+
+}
+
+function login(){
+
+let role=
+document
+.getElementById("role")
+.value;
+
+if(role==="parent"){
+
+document
+.getElementById("parentSchool")
+.innerText=
+selectedSchool;
+
+hideAll();
+
+document
+.getElementById("parent")
+.classList.remove("hidden");
+
+}
+
+else{
+
+showStaff(role);
+
+}
+
+}
+
+function showStaff(role){
+
+let titles={
+
+head:
+"Head Teacher / Headmaster",
+
+deputy:
+"Deputy Head Teacher",
+
+dos:
+"Director of Studies",
+
+bursar:
+"Bursar / Finance",
+
+teacher:
+"Class Teacher",
+
+board:
+"School Governing Board"
+
+};
+
+let modules={
+
+head:
+"Full school management access",
+
+deputy:
+"Student welfare, attendance and assigned school operations",
+
+dos:
+"Academics, subjects, exams and results",
+
+bursar:
+"Fees, income, expenditure and financial reports",
+
+teacher:
+"Assigned students, performance, attendance and comments",
+
+board:
+"Governance and approved school reports"
+
+};
+
+document
+.getElementById("staffTitle")
+.innerText=titles[role];
+
+document
+.getElementById("staffSchool")
+.innerText=selectedSchool;
+
+document
+.getElementById("staffModules")
+.innerHTML=
+"<h3>Authorized Services</h3>"+
+"<p class='muted'>"+
+modules[role]+
+"</p>";
+
+hideAll();
+
+document
+.getElementById("staff")
+.classList.remove("hidden");
+
+}
+
+function searchSchools(){
+
+let search=
+document
+.getElementById("schoolSearch")
+.value
+.toLowerCase();
+
+document
+.querySelectorAll(".school")
+.forEach(
+school=>{
+
+school.style.display=
+school.innerText
+.toLowerCase()
+.includes(search)
+?
+"block"
+:
+"none";
+
+});
+
+}
+
 </script>
 
 </body>
